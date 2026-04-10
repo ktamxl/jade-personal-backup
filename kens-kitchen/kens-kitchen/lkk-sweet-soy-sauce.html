@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lee Kum Kee Sweet Soy Sauce — Ken's Kitchen Pantry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --cream: #faf7f2; --warm-white: #fffdf9; --ink: #1a1a1a; --ink-light: #4a4a4a; --gold: #c8952a; --gold-light: #e8b84b; --border: #e8e0d4; --shadow: rgba(0,0,0,0.08); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.7; }
+    nav { background: var(--ink); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+    nav a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    nav a:hover { color: var(--gold-light); }
+    nav .site-name { font-family: 'Playfair Display', serif; font-size: 1rem; color: white; letter-spacing: 0; text-transform: none; font-weight: 400; }
+    .hero { position: relative; background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 50%, #1a0a00 100%); padding: 80px 48px 72px; overflow: hidden; min-height: 280px; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(200,149,42,0.15) 0%, transparent 70%); }
+    .hero-inner { position: relative; z-index: 1; max-width: 600px; }
+    .hero-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; color: white; line-height: 1.15; margin-bottom: 10px; }
+    .hero-chinese { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+    .hero-tagline { font-size: 0.97rem; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.7; }
+    .hero-bottle { position: absolute; right: 80px; top: 50%; transform: translateY(-50%); height: 240px; width: auto; object-fit: contain; opacity: 0.92; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
+    .content-wrap { max-width: 780px; margin: 0 auto; padding: 64px 32px 80px; }
+    .lead { font-size: 1.12rem; font-weight: 300; color: var(--ink-light); line-height: 1.9; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+    .section-head { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .section-head .num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 400; color: var(--border); line-height: 1; }
+    .section-head h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--ink); }
+    .prose { font-size: 0.97rem; color: var(--ink-light); line-height: 1.85; margin-bottom: 36px; }
+    .prose p { margin-bottom: 1.2em; }
+    .prose strong { color: var(--ink); }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 32px 0; }
+    .info-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 2px; padding: 18px 20px; }
+    .info-card .label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
+    .info-card .value { font-size: 0.93rem; color: var(--ink); }
+    .usage-list { list-style: none; margin: 0 0 36px; }
+    .usage-list li { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .usage-list li:last-child { border-bottom: none; }
+    .usage-list .icon { flex-shrink: 0; font-size: 1.3rem; margin-top: 1px; }
+    .usage-list .usage-text strong { color: var(--ink); display: block; margin-bottom: 4px; font-size: 0.95rem; }
+    .usage-list .usage-text span { color: var(--ink-light); font-size: 0.88rem; line-height: 1.65; }
+    .highlight-box { background: var(--ink); color: white; border-radius: 4px; padding: 32px; margin: 40px 0; }
+    .highlight-box h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold-light); margin-bottom: 14px; }
+    .highlight-box p { font-size: 0.92rem; color: rgba(255,255,255,0.7); line-height: 1.75; }
+    .recipe-callout { background: #f5f0e8; border: 1px solid var(--border); border-radius: 4px; padding: 22px 28px; display: flex; align-items: center; gap: 20px; margin: 40px 0; text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .recipe-callout:hover { border-color: var(--gold); box-shadow: 0 2px 12px var(--shadow); }
+    .recipe-callout img { width: 72px; height: 72px; object-fit: cover; border-radius: 2px; flex-shrink: 0; }
+    .recipe-callout .rlabel { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 4px; }
+    .recipe-callout strong { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--ink); display: block; margin-bottom: 4px; }
+    .recipe-callout p { font-size: 0.85rem; color: var(--ink-light); }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    .back-bar { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); transition: color 0.2s; }
+    .back-link:hover { color: var(--gold); }
+    footer { background: var(--ink); color: rgba(255,255,255,0.4); text-align: center; padding: 32px 24px; font-size: 0.85rem; }
+    footer strong { color: rgba(255,255,255,0.7); }
+    @media (max-width: 600px) {
+      nav { padding: 14px 16px; } nav .site-name { display: none; }
+      .hero { padding: 48px 20px 56px; min-height: auto; }
+      .hero-bottle { display: none; }
+      .hero-title { font-size: 1.8rem; }
+      .content-wrap { padding: 36px 18px 56px; }
+      .lead { font-size: 1rem; }
+      .info-grid { grid-template-columns: 1fr; }
+      .recipe-callout { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"/></svg>
+      All Recipes
+    </a>
+    <a href="index.html" class="site-name">Ken's Kitchen</a>
+    <span style="width:100px"></span>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">The Pantry &middot; Essential Sauces</div>
+      <h1 class="hero-title">Lee Kum Kee Sweet Soy Sauce</h1>
+      <div class="hero-chinese">李錦記甜豉油</div>
+      <p class="hero-tagline">The bottle that transforms a good clay pot rice into a great one. A Cantonese pantry staple for over a century.</p>
+    </div>
+    <img src="imgs/lkk-sweet-soy-sauce.jpg" alt="Lee Kum Kee Sweet Soy Sauce" class="hero-bottle" />
+  </div>
+
+  <div class="content-wrap">
+
+    <p class="lead">
+      There are dishes that have a specific sauce, and clay pot rice is one of them. You can finish 煲仔飯 with regular soy sauce — but it will taste flat, sharp, and unfinished. Lee Kum Kee's Sweet Soy Sauce is pre-balanced: slightly thickened, gently sweet, with a roasted soy depth that was calibrated specifically to pour over hot rice and meld with rendered fat and steam. It is not a shortcut. It is the answer.
+    </p>
+
+    <div class="section-head"><span class="num">01</span><h2>What It Is</h2></div>
+    <div class="prose">
+      <p>Lee Kum Kee (李錦記) was founded in 1888 in Guangdong province — the same region that gave the world dim sum, roast goose, wonton soup, and clay pot rice. Their <strong>Sweet Soy Sauce</strong> (甜豉油 or 煲仔飯醬油) is a specialized product, distinct from their light or dark soy sauces.</p>
+      <p>It is richer and more viscous than standard soy sauce, with sweetness from added sugar and caramel depth from caramel color. The result is a sauce that clings to rice grains, seasons them evenly, and delivers both savory and sweet in a single pour — exactly what a finished clay pot needs.</p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card"><span class="label">Type</span><span class="value">Sweet / Seasoned Soy Sauce</span></div>
+      <div class="info-card"><span class="label">Brand</span><span class="value">Lee Kum Kee (李錦記)</span></div>
+      <div class="info-card"><span class="label">Chinese Name</span><span class="value">甜豉油 / 煲仔飯醬油</span></div>
+      <div class="info-card"><span class="label">Main Ingredients</span><span class="value">Water, Sugar, Salt, Soybeans, Wheat, Caramel Color</span></div>
+      <div class="info-card"><span class="label">Flavor Profile</span><span class="value">Sweet, savory, roasted soy — slightly viscous</span></div>
+      <div class="info-card"><span class="label">Where to Buy</span><span class="value">99 Ranch, H Mart, Asian grocers, Amazon</span></div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="section-head"><span class="num">02</span><h2>How Ken Uses It</h2></div>
+
+    <ul class="usage-list">
+      <li>
+        <div class="icon">🍲</div>
+        <div class="usage-text">
+          <strong>The Clay Pot Finish — Primary Use</strong>
+          <span>Poured around the lid edge after the stove is turned off. Seeps down the sides into the rice during the 8-minute rest. This is the defining flavour of 煲仔飯. Ken drizzles 2–3 tablespoons, then adds more at the table after stirring to personal taste.</span>
+        </div>
+      </li>
+      <li>
+        <div class="icon">🍜</div>
+        <div class="usage-text">
+          <strong>Stir-Fried Noodles &amp; Rice</strong>
+          <span>A small amount adds a caramel depth and sheen that plain soy cannot achieve. Especially effective in wok-fried flat rice noodles (乾炒牛河).</span>
+        </div>
+      </li>
+      <li>
+        <div class="icon">🥟</div>
+        <div class="usage-text">
+          <strong>Dim Sum Dipping &amp; Cheung Fun</strong>
+          <span>The original use. Cantonese restaurants serve it with steamed rice rolls (腸粉). Its sweetness balances the fermented salt of the soy and pairs naturally with sesame oil.</span>
+        </div>
+      </li>
+      <li>
+        <div class="icon">🎋</div>
+        <div class="usage-text">
+          <strong>Zongzi (Rice Dumplings)</strong>
+          <span>A drizzle over sticky rice dumplings before eating is traditional in many Cantonese households during Dragon Boat Festival.</span>
+        </div>
+      </li>
+    </ul>
+
+    <div class="highlight-box">
+      <h3>Why Not Just Use Dark Soy Sauce?</h3>
+      <p>Dark soy sauce (老抽) is intensely salty and used primarily for color. It has no sweetness and would make clay pot rice taste harsh and one-dimensional. Sweet soy sauce has been pre-balanced: less salt, added sugar, and a viscosity that helps it coat every grain evenly as it runs down the sides of a hot clay pot. They are not interchangeable — and using the wrong one will ruin the dish.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="section-head"><span class="num">03</span><h2>Storage &amp; Notes</h2></div>
+    <div class="prose">
+      <p>Store at room temperature before opening. Once opened, refrigerate and use within 6 months for best flavour. The sauce thickens slightly when cold — bring to room temperature before use if you want it to pour easily around the lid.</p>
+      <p>The 410ml bottle is the standard size at most Asian grocery stores. If you cook clay pot rice regularly, buy two — you go through it faster than you expect.</p>
+    </div>
+
+    <a href="clay-pot-rice.html" class="recipe-callout">
+      <img src="imgs/claypot-finished-open.jpeg" alt="Clay Pot Rice" />
+      <div>
+        <span class="rlabel">Use It In</span>
+        <strong>Ken's Ultimate Clay Pot Rice 煲仔飯</strong>
+        <p>The recipe this sauce was made for. Step-by-step with all of Ken's photos &rarr;</p>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="back-bar">
+    <a href="index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"/></svg>
+      Back to Ken's Kitchen
+    </a>
+  </div>
+
+  <footer>
+    <strong>Ken's Kitchen</strong> &middot; The Pantry &middot; Essential Sauces<br/>
+    食在家中，味在心裡
+  </footer>
+
+</body>
+</html>

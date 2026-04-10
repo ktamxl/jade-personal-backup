@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>鼓汁蒸排骨 — Ken's Kitchen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --cream: #faf7f2; --warm-white: #fffdf9; --ink: #1a1a1a; --ink-light: #4a4a4a; --gold: #c8952a; --gold-light: #e8b84b; --border: #e8e0d4; --shadow: rgba(0,0,0,0.08); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.7; }
+    nav { background: var(--ink); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+    nav a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    nav a:hover { color: var(--gold-light); }
+    nav .site-name { font-family: 'Playfair Display', serif; font-size: 1rem; color: white; letter-spacing: 0; text-transform: none; font-weight: 400; }
+    .hero { position: relative; background: linear-gradient(135deg, #1a0800 0%, #3a1a00 50%, #1a0800 100%); padding: 80px 48px 72px; overflow: hidden; min-height: 300px; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 50%, rgba(200,149,42,0.12) 0%, transparent 70%); }
+    .hero-inner { position: relative; z-index: 1; max-width: 600px; }
+    .hero-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; color: white; line-height: 1.1; margin-bottom: 8px; }
+    .hero-chinese { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.15rem; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
+    .hero-tagline { font-size: 0.95rem; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.7; max-width: 480px; }
+    .content-wrap { max-width: 780px; margin: 0 auto; padding: 64px 32px 80px; }
+    .lead { font-size: 1.08rem; font-weight: 300; color: var(--ink-light); line-height: 1.9; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+    .section-head { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .section-head .num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 400; color: var(--border); line-height: 1; }
+    .section-head h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--ink); }
+    .prose { font-size: 0.96rem; color: var(--ink-light); line-height: 1.88; margin-bottom: 40px; }
+    .prose p { margin-bottom: 1.2em; }
+    .prose strong { color: var(--ink); }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 32px 0; }
+    .info-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 2px; padding: 18px 20px; }
+    .info-card .label { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
+    .info-card .value { font-size: 0.92rem; color: var(--ink); }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    .recipe-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin: 40px 0; }
+    .recipe-card-header { background: var(--ink); padding: 24px 28px; }
+    .recipe-card-header h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: white; margin-bottom: 6px; }
+    .recipe-card-header p { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+    .recipe-steps { padding: 28px; }
+    .step { display: grid; grid-template-columns: 48px 1fr; gap: 20px; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); align-items: start; }
+    .step:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); color: white; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .step-body h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .step-body p { font-size: 0.93rem; color: var(--ink-light); line-height: 1.8; }
+    .step-body .note { margin-top: 8px; font-size: 0.85rem; color: var(--gold); font-style: italic; }
+    .ingredient-table { width: 100%; border-collapse: collapse; }
+    .ingredient-table th { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); padding: 10px 16px; border-bottom: 2px solid var(--border); text-align: left; }
+    .ingredient-table td { padding: 13px 16px; border-bottom: 1px solid var(--border); font-size: 0.93rem; color: var(--ink-light); vertical-align: top; }
+    .ingredient-table tr:last-child td { border-bottom: none; }
+    .ingredient-table .ing-name { color: var(--ink); font-weight: 400; }
+    .highlight-box { background: var(--ink); color: white; border-radius: 4px; padding: 32px; margin: 40px 0; }
+    .highlight-box h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold-light); margin-bottom: 12px; }
+    .highlight-box p { font-size: 0.92rem; color: rgba(255,255,255,0.7); line-height: 1.78; }
+    .steam-note { background: #f5f0e8; border: 1px solid var(--border); border-radius: 4px; padding: 22px 28px; margin: 36px 0; }
+    .steam-note h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--ink); margin-bottom: 8px; }
+    .steam-note p { font-size: 0.9rem; color: var(--ink-light); line-height: 1.8; }
+    .back-bar { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); transition: color 0.2s; }
+    .back-link:hover { color: var(--gold); }
+    footer { background: var(--ink); color: rgba(255,255,255,0.4); text-align: center; padding: 32px 24px; font-size: 0.85rem; }
+    footer strong { color: rgba(255,255,255,0.7); }
+    @media (max-width: 600px) {
+      nav { padding: 14px 16px; } nav .site-name { display: none; }
+      .hero { padding: 48px 20px 52px; }
+      .hero-title { font-size: 1.8rem; }
+      .content-wrap { padding: 36px 18px 56px; }
+      .info-grid { grid-template-columns: 1fr 1fr; }
+      .step { grid-template-columns: 36px 1fr; }
+    }
+    @media (max-width: 400px) {
+      .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"/></svg>
+      All Recipes
+    </a>
+    <a href="index.html" class="site-name">Ken's Kitchen</a>
+    <span style="width:100px"></span>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Steam &middot; Cantonese Classics</div>
+      <h1 class="hero-title">鼓汁蒸排骨</h1>
+      <div class="hero-chinese">Steamed Pork Ribs with Black Bean &amp; Garlic</div>
+      <p class="hero-tagline">A dim sum icon in 30 minutes. Silken pork ribs glazed in fermented black bean, garlic, and a whisper of sesame — done in a bamboo steamer over a wok.</p>
+    </div>
+  </div>
+
+  <div class="content-wrap">
+
+    <p class="lead">
+      Every Cantonese dim sum morning begins with a bamboo steamer. And every bamboo steamer worth its salt has 鼓汁蒸排骨 — pork ribs steamed in black bean garlic sauce — on the menu. The technique is ancient and precise: coat the ribs in a glossy sauce, steam them over high heat for 12 minutes, and what arrives at the table is meat that slides off the bone without resistance, in a dark, fragrant sauce that tastes of the sea, the earth, and decades of morning ritual.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card"><span class="label">Prep Time</span><span class="value">15 minutes</span></div>
+      <div class="info-card"><span class="label">Steam Time</span><span class="value">12–15 minutes</span></div>
+      <div class="info-card"><span class="label">Difficulty</span><span class="value">Easy — Classic Technique</span></div>
+      <div class="info-card"><span class="label">Cuisine</span><span class="value">Cantonese · 粵菜</span></div>
+      <div class="info-card"><span class="label">Serve</span><span class="value">2–3 people as a main, 4 as part of a spread</span></div>
+      <div class="info-card"><span class="label">Key Equipment</span><span class="value">Wok + bamboo steamer or large steamer pot</span></div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- INGREDIENTS -->
+    <div class="section-head"><span class="num">01</span><h2>Ingredients</h2></div>
+    <table class="ingredient-table">
+      <thead><tr><th>Ingredient</th><th>Amount</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="ing-name">Pork ribs</td><td>400–500 g</td><td>Cut into 4–5cm pieces. Ask your butcher to cut them — do not use whole rack. Smaller pieces = more surface area for the sauce.</td></tr>
+        <tr><td class="ing-name">Black bean sauce (豆鼓醬)</td><td>1–1.5 tablespoons</td><td>Not fermented black beans — the ready-made sauce. Lee Kum Kee is the standard brand. Use the thick kind, not the soupy kind.</td></tr>
+        <tr><td class="ing-name">Garlic</td><td>3–4 cloves</td><td>Minced to a paste. The finer, the better — it disperses into the sauce and flavours the meat evenly.</td></tr>
+        <tr><td class="ing-name">Ginger</td><td>1 small piece, ~1cm</td><td>Finely minced. Adds warmth and cuts through the richness of the pork fat.</td></tr>
+        <tr><td class="ing-name">Sugar</td><td>1 teaspoon</td><td>Balances the salt of the black bean sauce. Do not skip — it is the difference between one-dimensional and complex.</td></tr>
+        <tr><td class="ing-name">Cornstarch (生粉)</td><td>1–2 tablespoons</td><td>This is the key to the silky gloss. Coat the ribs lightly — too much and they feel pasty.</td></tr>
+        <tr><td class="ing-name">Sesame oil</td><td>1 teaspoon</td><td>Added at the end after steaming — never cooked, just drizzled to finish.</td></tr>
+        <tr><td class="ing-name">Shaoxing rice wine</td><td>1 teaspoon</td><td>Optional, but adds a gentle depth. Mirin works as a substitute.</td></tr>
+        <tr><td class="ing-name">Neutral oil</td><td>1 tablespoon</td><td>For mixing into the sauce. Peanut or sunflower oil.</td></tr>
+        <tr><td class="ing-name">Cilantro (香菜)</td><td>A handful</td><td>Stem-on for garnish. The citrusy edge cuts through the rich sauce beautifully.</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="divider" />
+
+    <!-- METHOD -->
+    <div class="section-head"><span class="num">02</span><h2>Method</h2></div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>Clean the Ribs</h4>
+        <p>Rinse the pork ribs under cold water, then blanch them: drop into a pot of boiling water for 1 minute, then drain and rinse under cold water. This removes blood and impurities that cause the sauce to go cloudy and muddy. Pat completely dry with paper towels — moisture is the enemy of the sauce coating.</p>
+        <p class="note">Ken skips the blanching when in a hurry — the flavour is nearly as good, but the sauce is a shade less clean. Your call.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>Make the Black Bean Sauce</h4>
+        <p>In a small bowl, combine the black bean sauce, minced garlic, minced ginger, sugar, and Shaoxing wine. Stir to dissolve the sugar. The sauce should smell heady and deep immediately — if it doesn't, add a few more drops of black bean sauce.</p>
+        <p class="note">The sauce should be looser than you expect — it will tighten up when it coats the ribs and again when steamed.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>Coat the Ribs</h4>
+        <p>Place the dried ribs in a large bowl. Add the black bean sauce mixture and toss thoroughly — every piece should be coated. Then add the cornstarch and toss again. Finally, drizzle over the neutral oil and toss once more. The oil seals the surface and gives the finished ribs their characteristic shine.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4>Steam Over High Heat</h4>
+        <p>Bring a wok or large steamer pot of water to a vigorous boil. Place the ribs on a heat-proof plate and set it in the steamer. Steam on <strong>high heat for 12–15 minutes</strong>. Do not open the steamer during this time — every opening releases heat and interrupts the cooking.</p>
+        <p>The ribs are done when the meat pulls easily from the bone and the sauce has darkened to a deep, glossy brown.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h4>Finish with Sesame Oil &amp; Cilantro</h4>
+        <p>Remove the plate from the steamer. Drizzle 1 teaspoon of sesame oil over the ribs — do not stir it in, just let it sit on the surface. Garnish generously with cilantro stems and leaves. Serve immediately with steamed jasmine rice.</p>
+        <p class="note">Steamed ribs wait for no one. Serve the moment they come out of the steamer — they cool quickly and the texture changes.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>The Wok &amp; Steamer Setup</h3>
+      <p>If you have a wok with a不锈钢 Steamer lid and rack, this is the ideal setup: a large flat-bottom wok holds enough water to steam for 15 minutes without refilling. If using a regular large steamer pot, bring the water to a boil first, then arrange the plates inside — the principle is identical. The key is <strong>high heat throughout</strong>: a rolling boil the entire time, not a gentle simmer.</p>
+    </div>
+
+    <div class="steam-note">
+      <h4>Why It Steams, Not Boils</h4>
+      <p>Steaming at 100°C with dry heat (steam) is gentler than boiling, but the high heat of a vigorously boiling wok still tenderises the collagen in the pork ribs efficiently. The result is meat that is falling-tender but retains its shape, coated in a sauce that has reduced and intensified rather than diluted. Boiling would wash the sauce off the meat and make everything bland.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="section-head"><span class="num">03</span><h2>What to Serve It With</h2></div>
+    <div class="prose">
+      <p>鼓汁蒸排骨 is part of a Cantonese meal, not the meal itself. Serve it with:</p>
+      <p><strong>Steamed jasmine rice (白飯)</strong> — the plain rice is the counterpoint to the rich sauce. Drizzle any remaining sauce directly onto the rice.</p>
+      <p><strong>Stir-fried greens with garlic (蒜蓉炒菜)</strong> — Chinese broccoli (芥藍) or choy sum with a hit of garlic and oyster sauce.</p>
+      <p><strong>A clay pot rice on the side (煲仔飯)</strong> — the contrast between steamed ribs and the crispy bottom of a clay pot rice is texturally perfect.</p>
+      <p><strong>Cantonese soup (老火湯)</strong> — if you have time, a steamed chicken soup with dried scallops and lotus seed is the traditional companion.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="section-head"><span class="num">04</span><h2>Kenin's Notes</h2></div>
+    <div class="prose">
+      <p>The first time I ordered this at a dim sum restaurant in Hong Kong, the ribs arrived still sizzling — the moment the lid lifted from the steamer, the fragrance hit with a force that had nothing to do with the food. It was the black bean. It smelled like a salted beach at low tide. Salty, oceanic, alive.</p>
+      <p>The quality of the black bean sauce matters here in a way it doesn't in most dishes. Lee Kum Kee is reliable and correct. Avoid generic supermarket soy sauce with added flavourings — they will fight the black bean and muddy the finish.</p>
+      <p>Steaming is forgiving in a way that wok-frying is not — you have 12 minutes of leeway, not 90 seconds. Use that time to get your rice ready, your greens ready, and your serving plate warm. A warm plate keeps the ribs at their best for the critical first three minutes at the table.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="section-head"><span class="num">05</span><h2>Watch the Recipe</h2></div>
+    <div class="recipe-card">
+      <div class="recipe-card-header">
+        <h3>鼓汁蒸排骨 — Video Reference</h3>
+        <p>Full cooking demonstration — watch before you cook.</p>
+      </div>
+      <div class="recipe-card-body" style="padding:20px 28px;">
+        <a href="https://youtu.be/t1SzAHql6BQ" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink);border:1px solid var(--border);border-radius:4px;padding:16px 20px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:64px;height:48px;background:var(--ink);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;margin-bottom:4px;">Watch on YouTube</div>
+            <div style="font-size:0.82rem;color:var(--ink-light);">鼓汁蒸排骨 · Steamed Pork Ribs with Black Bean</div>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="var(--ink-light)" stroke-width="2" style="margin-left:auto;flex-shrink:0;"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="back-bar">
+    <a href="index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"/></svg>
+      Back to Ken's Kitchen
+    </a>
+  </div>
+
+  <footer>
+    <strong>Ken's Kitchen</strong> &middot; Steam &amp; Cantonese Classics<br/>
+    食在家中，味在心裡
+  </footer>
+
+</body>
+</html>

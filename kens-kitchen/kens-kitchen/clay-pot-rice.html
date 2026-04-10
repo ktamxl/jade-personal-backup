@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ultimate Clay Pot Rice 煲仔飯 — Ken's Kitchen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --cream: #faf7f2; --warm-white: #fffdf9; --ink: #1a1a1a; --ink-light: #4a4a4a; --gold: #c8952a; --gold-light: #e8b84b; --red: #8b1a1a; --border: #e8e0d4; --shadow: rgba(0,0,0,0.08); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.7; }
+    nav { background: var(--ink); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+    nav a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    nav a:hover { color: var(--gold-light); }
+    nav .site-name { font-family: 'Playfair Display', serif; font-size: 1rem; color: white; letter-spacing: 0; text-transform: none; font-weight: 400; }
+    .hero { position: relative; height: 75vh; min-height: 460px; overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.5); }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%); }
+    .hero-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 48px 48px 52px; max-width: 900px; }
+    .hero-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 14px; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 700; color: white; line-height: 1.1; margin-bottom: 10px; }
+    .hero-chinese { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; color: rgba(255,255,255,0.65); }
+    .meta-bar { background: var(--ink); display: flex; flex-wrap: wrap; }
+    .meta-item { padding: 18px 28px; border-right: 1px solid rgba(255,255,255,0.08); flex: 1; min-width: 120px; }
+    .meta-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 4px; }
+    .meta-value { font-size: 0.95rem; color: rgba(255,255,255,0.85); }
+    .content-wrap { max-width: 860px; margin: 0 auto; padding: 64px 32px 80px; }
+    .recipe-intro { font-size: 1.15rem; font-weight: 300; color: var(--ink-light); line-height: 1.9; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+    .photo-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 48px; }
+    .photo-strip img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 2px; }
+    .step-photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    .step-photo-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 2px; }
+    .step-photo-caption { margin-top: 8px; font-size: 0.82rem; color: #aaa; font-style: italic; text-align: center; }
+    .section-head { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .section-head .num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 400; color: var(--border); line-height: 1; }
+    .section-head h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; color: var(--ink); }
+    .ingredient-group { margin-bottom: 36px; }
+    .ingredient-group h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--gold); display: inline-block; }
+    .ingredient-table { width: 100%; border-collapse: collapse; }
+    .ingredient-table td { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+    .ingredient-table td:first-child { color: var(--ink); width: 62%; }
+    .ingredient-table td:last-child { color: var(--ink-light); text-align: right; font-weight: 700; }
+    .tip-box { background: #fffbf0; border-left: 3px solid var(--gold); padding: 14px 18px; margin-top: 16px; font-size: 0.9rem; color: var(--ink-light); border-radius: 0 2px 2px 0; }
+    .tip-box strong { color: var(--gold); }
+    .warn-box { background: #fff5f5; border-left: 3px solid var(--red); padding: 14px 18px; margin-top: 14px; font-size: 0.88rem; color: #6b2020; border-radius: 0 2px 2px 0; }
+    .warn-box strong { color: var(--red); }
+    .instructions { list-style: none; }
+    .instructions li { display: flex; gap: 20px; margin-bottom: 40px; align-items: flex-start; }
+    .step-num { flex-shrink: 0; width: 36px; height: 36px; background: var(--ink); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; margin-top: 2px; }
+    .step-body { flex: 1; }
+    .step-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+    .step-text { font-size: 0.95rem; color: var(--ink-light); line-height: 1.75; }
+    .timer-sequence { background: var(--ink); border-radius: 4px; padding: 28px 32px; margin: 36px 0; color: white; }
+    .timer-sequence h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold-light); margin-bottom: 20px; }
+    .timer-row { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .timer-row:last-child { border-bottom: none; }
+    .timer-badge { flex-shrink: 0; background: var(--gold); color: white; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; min-width: 70px; text-align: center; }
+    .timer-badge.rest { background: #444; }
+    .timer-label { font-size: 0.92rem; color: rgba(255,255,255,0.8); }
+    .timer-label span { color: var(--gold-light); font-weight: 700; }
+    .shift-diagram { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
+    .shift-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 16px 10px; text-align: center; }
+    .shift-card .arrow { font-size: 1.8rem; margin-bottom: 6px; }
+    .shift-card .direction { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 2px; }
+    .shift-card .duration { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+    .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .note-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 2px; padding: 20px; }
+    .note-card .icon { font-size: 1.4rem; margin-bottom: 8px; }
+    .note-card h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; margin-bottom: 6px; }
+    .note-card p { font-size: 0.87rem; color: var(--ink-light); line-height: 1.6; }
+    .pantry-link-box { background: #f5f0e8; border: 1px solid var(--border); border-radius: 4px; padding: 22px 28px; display: flex; align-items: center; gap: 20px; margin: 48px 0; text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .pantry-link-box:hover { border-color: var(--gold); box-shadow: 0 2px 12px var(--shadow); }
+    .pantry-link-box img { width: 64px; height: 80px; object-fit: contain; flex-shrink: 0; border-radius: 2px; }
+    .pantry-link-text .plabel { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 4px; }
+    .pantry-link-text strong { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--ink); display: block; margin-bottom: 4px; }
+    .pantry-link-text p { font-size: 0.85rem; color: var(--ink-light); }
+    .scaling-box { background: var(--ink); color: white; padding: 32px; border-radius: 4px; margin-top: 52px; }
+    .scaling-box h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 8px; color: var(--gold-light); }
+    .scaling-box p { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+    .scale-controls { display: flex; gap: 12px; flex-wrap: wrap; }
+    .scale-btn { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); padding: 8px 20px; border-radius: 2px; cursor: pointer; font-size: 0.85rem; font-family: 'Lato', sans-serif; transition: all 0.2s; }
+    .scale-btn:hover, .scale-btn.active { background: var(--gold); border-color: var(--gold); color: white; }
+    .scale-note { margin-top: 16px; font-size: 0.85rem; color: rgba(255,255,255,0.5); font-style: italic; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 52px 0; }
+    .back-bar { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); transition: color 0.2s; }
+    .back-link:hover { color: var(--gold); }
+    footer { background: var(--ink); color: rgba(255,255,255,0.4); text-align: center; padding: 32px 24px; font-size: 0.85rem; }
+    footer strong { color: rgba(255,255,255,0.7); }
+    @media (max-width: 600px) {
+      nav { padding: 14px 16px; } nav .site-name { display: none; }
+      .hero { height: 60vh; min-height: 360px; } .hero-content { padding: 24px 20px 32px; }
+      .hero-title { font-size: 2rem; } .hero-chinese { font-size: 1.1rem; }
+      .meta-bar { display: grid; grid-template-columns: 1fr 1fr; }
+      .meta-item { min-width: unset; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .content-wrap { padding: 36px 18px 56px; } .recipe-intro { font-size: 1rem; }
+      .photo-strip, .step-photo-grid { grid-template-columns: 1fr; }
+      .section-head .num { font-size: 2.2rem; } .section-head h2 { font-size: 1.3rem; }
+      .ingredient-table td { font-size: 0.88rem; }
+      .instructions li { gap: 14px; } .step-num { width: 30px; height: 30px; font-size: 0.75rem; }
+      .step-title { font-size: 0.98rem; } .step-text { font-size: 0.9rem; }
+      .notes-grid { grid-template-columns: 1fr; }
+      .shift-diagram { grid-template-columns: 1fr 1fr; }
+      .timer-sequence { padding: 20px 16px; }
+      .scaling-box { padding: 24px 20px; } .scale-controls { flex-direction: column; } .scale-btn { width: 100%; text-align: center; }
+      .pantry-link-box { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"/></svg>
+      All Recipes
+    </a>
+    <a href="index.html" class="site-name">Ken's Kitchen</a>
+    <span style="width:100px"></span>
+  </nav>
+
+  <section class="hero">
+    <img class="hero-img" src="imgs/claypot-hero.jpg" alt="Ultimate Clay Pot Rice" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Recipe No. 003 &middot; Chinese &middot; Cantonese Classic</div>
+      <h1 class="hero-title">Ultimate Clay Pot Rice</h1>
+      <div class="hero-chinese">煲仔飯</div>
+    </div>
+  </section>
+
+  <div class="meta-bar">
+    <div class="meta-item"><span class="meta-label">Serves</span><span class="meta-value">3–4</span></div>
+    <div class="meta-item"><span class="meta-label">Rice Prep</span><span class="meta-value">Soak 30–60 min + 1 hr fridge</span></div>
+    <div class="meta-item"><span class="meta-label">Cook Time</span><span class="meta-value">~35 min active</span></div>
+    <div class="meta-item"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+    <div class="meta-item"><span class="meta-label">Base Quantity</span><span class="meta-value">3 cups rice</span></div>
+  </div>
+
+  <div class="content-wrap">
+
+    <p class="recipe-intro">
+      Clay pot rice is one of those dishes where the vessel <em>is</em> the recipe. The thick clay walls absorb and radiate heat differently than any metal pot — slower, more even, more patient. The result is rice that is firm and separate on top, fragrant with sesame and soy throughout, and crowned at the bottom with <strong>鍋巴</strong> — the golden, crackling crust that every diner races to scrape. This is Ken's version: built around the right rice, the right pot, and a precise sequence of tilts and timers that turn a home stove into a clay pot specialist.
+    </p>
+
+    <div class="photo-strip">
+      <img src="imgs/claypot-finished-open.jpeg" alt="Clay pot rice freshly opened" />
+      <img src="imgs/claypot-finished-serve.jpeg" alt="Clay pot rice being served" />
+    </div>
+
+    <figure style="margin-bottom:48px;">
+      <img src="imgs/claypot-simiao-rice-bag.png" alt="凤粮台 台山丝苗米" style="width:100%;border-radius:2px;display:block;max-height:320px;object-fit:contain;background:#f5f0e8;" />
+      <p class="step-photo-caption">凤粮台 台山丝苗米 — labelled 煲仔飯專用米 (Special Rice for Clay Pot Rice). Its slender grains stay distinct under heat, absorb flavour without turning mushy, and produce the finest 鍋巴 crust.</p>
+    </figure>
+
+    <div class="section-head">
+      <span class="num">01</span>
+      <h2>Ingredients</h2>
+    </div>
+
+    <div class="ingredient-group">
+      <h3>The Rice Base</h3>
+      <table class="ingredient-table">
+        <tr><td>台山丝苗米 (Taishan Simiao Rice)</td><td>3 cups</td></tr>
+        <tr><td>Water</td><td>2&frac34; cups</td></tr>
+        <tr><td>Sesame oil (to coat pot)</td><td>~1 tbsp</td></tr>
+      </table>
+      <div class="tip-box"><strong>Water ratio:</strong> Standard is 1:1 — but Ken removes &frac14; cup for firmer, non-mushy rice. 3 cups rice &rarr; 2&frac34; cups water. Always.</div>
+    </div>
+
+    <div class="ingredient-group">
+      <h3>Toppings</h3>
+      <table class="ingredient-table">
+        <tr><td>Chicken thigh, cut into bite-sized chunks</td><td>400–500g</td></tr>
+        <tr><td>Lap Cheong (Chinese sausage), sliced diagonally</td><td>2 links</td></tr>
+        <tr><td>Dried shiitake mushrooms, rehydrated &amp; sliced</td><td>6–8 pieces</td></tr>
+        <tr><td>Fresh ginger, thinly sliced</td><td>6–8 slices</td></tr>
+      </table>
+    </div>
+
+    <div class="ingredient-group">
+      <h3>Chicken Marinade</h3>
+      <table class="ingredient-table">
+        <tr><td>Light soy sauce</td><td>1&frac12; tbsp</td></tr>
+        <tr><td>Oyster sauce</td><td>1 tbsp</td></tr>
+        <tr><td>Sesame oil</td><td>1 tsp</td></tr>
+        <tr><td>Cornstarch</td><td>1 tsp</td></tr>
+        <tr><td>Sugar</td><td>&frac12; tsp</td></tr>
+        <tr><td>White pepper</td><td>pinch</td></tr>
+        <tr><td>Shaoxing wine</td><td>1 tbsp</td></tr>
+      </table>
+    </div>
+
+    <div class="ingredient-group">
+      <h3>For the Crust &amp; Finish</h3>
+      <table class="ingredient-table">
+        <tr><td>Cooking oil (drizzled around lid edge)</td><td>2–3 tbsp</td></tr>
+        <tr><td>Lee Kum Kee Sweet Soy Sauce for Clay Pot Rice</td><td>to taste</td></tr>
+      </table>
+    </div>
+
+    <a href="lkk-sweet-soy-sauce.html" class="pantry-link-box">
+      <img src="imgs/lkk-sweet-soy-sauce.jpg" alt="Lee Kum Kee Sweet Soy Sauce" />
+      <div class="pantry-link-text">
+        <span class="plabel">From the Pantry</span>
+        <strong>Lee Kum Kee Sweet Soy Sauce 李錦記甜豉油</strong>
+        <p>The finishing sauce that makes 煲仔飯 taste like 煲仔飯. Read Ken's guide to this essential bottle &rarr;</p>
+      </div>
+    </a>
+
+    <hr class="divider" />
+
+    <div class="section-head">
+      <span class="num">02</span>
+      <h2>Instructions</h2>
+    </div>
+
+    <ol class="instructions">
+
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Wash, Soak &amp; Refrigerate the Rice</div>
+          <div class="step-text">Rinse the rice 3–4 times in cold water. Each time, gently scrub the grains between your palms in a praying motion 🙏 — you will feel the water go from milky-white to progressively clearer. On the final rinse, <strong>keep the water</strong> and let the rice soak for <strong>30 minutes to 1 hour</strong>. Then strain off all the water and place the wet rice — uncovered — in the <strong>refrigerator for 1 hour</strong>. This drying step removes surface moisture so your water-to-rice ratio lands exactly right every time.</div>
+          <div class="step-photo-grid">
+            <img src="imgs/claypot-simiao-rice-bag.png" alt="凤粮台 台山丝苗米" style="object-fit:contain;background:#f5f0e8;" />
+            <img src="imgs/claypot-rice-washing.jpeg" alt="Rinsing the rice" />
+          </div>
+          <div class="tip-box" style="margin-top:14px;"><strong>Still damp after the fridge?</strong> Pat gently with a paper towel before adding to the pot.</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Marinate the Toppings</div>
+          <div class="step-text">Combine the chicken with all marinade ingredients. Add the sliced shiitake, lap cheong, and ginger to the same bowl and toss together until everything is well coated. Marinate for at least <strong>30 minutes</strong>. The marinade juice is exactly what will seep down through the rice holes during cooking and flavour the grains from within.</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Oil the Clay Pot</div>
+          <div class="step-text">Pour about <strong>1 tablespoon of sesame oil</strong> into the dry clay pot. Use a silicone brush to coat the entire interior — bottom and all the way up the sides. This is the foundation of your 鍋巴 crust and prevents rice from fusing to the clay.</div>
+          <div class="step-photo-grid">
+            <img src="imgs/claypot-sesame-oil-prep.jpeg" alt="Pouring sesame oil into the clay pot" />
+            <img src="imgs/claypot-brushing-oil.jpeg" alt="Brushing oil evenly up the sides" />
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Add the Rice &amp; Water</div>
+          <div class="step-text">Transfer the refrigerated rice into the oiled pot. Pour in <strong>2&frac34; cups of cold water</strong>. Gently stir to level the rice evenly across the bottom.</div>
+          <div class="step-photo-grid">
+            <img src="imgs/claypot-adding-rice.jpeg" alt="Adding rice into the oiled clay pot" />
+            <img src="imgs/claypot-adding-water.jpeg" alt="Measuring and adding water" />
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">High Heat — Uncovered — Stay Close</div>
+          <div class="step-text">Place the clay pot on the stove over <strong>high heat</strong>. Do <strong>not</strong> cover it. Do not leave the station. Keep a chopstick within reach. You will watch the water go from still to steaming, then begin to boil.</div>
+          <img src="imgs/claypot-cooking-uncovered.jpeg" alt="Clay pot on high heat, uncovered, water simmering" style="width:100%;border-radius:2px;display:block;margin-top:14px;" />
+        </div>
+      </li>
+
+      <li>
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <div class="step-title">First Stir at the Boil</div>
+          <div class="step-text">The moment you see the water <strong>start to boil</strong> — bubbles forming at the edges and breaking through the rice surface — use a chopstick to give the rice a quick, gentle stir. Make sure no rice is sticking to the bottom. This is a brief but critical move: uneven contact with the hot bottom can cause patchy burning.</div>
+          <img src="imgs/claypot-boiling-stir.jpeg" alt="Stirring the rice at the first boil with chopsticks" style="width:100%;border-radius:2px;display:block;margin-top:14px;" />
+        </div>
+      </li>
+
+      <li>
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <div class="step-title">Poke Holes &amp; Add Toppings — Act Fast</div>
+          <div class="step-text">Keep watching. When the water is nearly gone from the surface — rice looks moist but no longer submerged — act quickly. Use the <strong>blunt end of a chopstick</strong> to poke holes all over the rice. This releases trapped steam from the bottom and opens channels for the topping marinade to seep down. Then immediately pour the marinated chicken, sausage, mushrooms, and ginger <strong>evenly over the rice surface</strong>.</div>
+          <div class="step-photo-grid">
+            <img src="imgs/claypot-chopstick-holes.jpeg" alt="Poking steam-release holes through the rice" />
+            <img src="imgs/claypot-adding-toppings.jpeg" alt="Pouring marinated toppings over the rice" />
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="step-num">8</div>
+        <div class="step-body">
+          <div class="step-title">Cover, Lower Heat &amp; Drizzle Oil Around the Lid</div>
+          <div class="step-text"><strong>Cover immediately.</strong> Turn heat down to <strong>low-medium</strong> (Ken uses level 4 on his stove — yours may vary; this is the one step that needs a test run or two to calibrate). Then drizzle cooking oil in a steady stream <strong>around the top edge of the lid</strong>, just as you did with the sesame oil. The oil seeps down the sides toward the bottom, where it fries the rice against the clay to build the 鍋巴. <strong>Set your timer: 6 minutes.</strong></div>
+          <div class="step-photo-grid">
+            <img src="imgs/claypot-heat-setting.jpeg" alt="Stove turned down to level 4" />
+            <img src="imgs/claypot-oil-around-lid.jpeg" alt="Drizzling oil around the edge of the lid" />
+          </div>
+          <img src="imgs/claypot-covered-cooking.jpeg" alt="Pot covered, oil drizzled, timer set" style="width:100%;border-radius:2px;display:block;margin-top:10px;" />
+        </div>
+      </li>
+
+      <li>
+        <div class="step-num">9</div>
+        <div class="step-body">
+          <div class="step-title">The Shifting Sequence &mdash; Building the Crust</div>
+          <div class="step-text">
+            This is where your wok ring earns its place. After the 6-minute base cook, use the wok ring to <strong>tilt and rotate the pot</strong> through four positions, allowing the gas flame to reach the sides of the clay pot and build an even crust all the way around. Use a multi-timer app to sequence the shifts with 1 minute between each.
+          </div>
+
+          <div class="timer-sequence">
+            <h3>Rotation Sequence &mdash; After the First 6 Minutes</h3>
+            <div class="timer-row">
+              <div class="timer-badge">2 min</div>
+              <div class="timer-label">Tilt <span>LEFT</span> &mdash; flame concentrates on left side of pot</div>
+            </div>
+            <div class="timer-row">
+              <div class="timer-badge rest">1 min</div>
+              <div class="timer-label">Brief pause &mdash; reposition for next shift</div>
+            </div>
+            <div class="timer-row">
+              <div class="timer-badge">2 min</div>
+              <div class="timer-label">Tilt <span>RIGHT</span> &mdash; flame reaches right side</div>
+            </div>
+            <div class="timer-row">
+              <div class="timer-badge rest">1 min</div>
+              <div class="timer-label">Brief pause</div>
+            </div>
+            <div class="timer-row">
+              <div class="timer-badge">2 min</div>
+              <div class="timer-label">Tilt <span>FRONT</span> &mdash; pot angled toward you</div>
+            </div>
+            <div class="timer-row">
+              <div class="timer-badge rest">1 min</div>
+              <div class="timer-label">Brief pause</div>
+            </div>
+            <div class="timer-row">
+              <div class="timer-badge">2 min</div>
+              <div class="timer-label">Tilt <span>BACK</span> &mdash; pot angled away from you</div>
+            </div>
+            <div class="shift-diagram">
+              <div class="shift-card"><div class="arrow">&#8592;</div><div class="direction">Left</div><div class="duration">2 min</div></div>
+              <div class="shift-card"><div class="arrow">&#8594;</div><div class="direction">Right</div><div class="duration">2 min</div></div>
+              <div class="shift-card"><div class="arrow">&#8595;</div><div class="direction">Front</div><div class="duration">2 min</div></div>
+              <div class="shift-card"><div class="arrow">&#8593;</div><div class="direction">Back</div><div class="duration">2 min</div></div>
+            </div>
+          </div>
+
+          <div class="step-photo-grid">
+            <img src="imgs/claypot-tilt-left.jpeg" alt="Pot tilted left on wok ring" />
+            <img src="imgs/claypot-tilt-right.jpeg" alt="Pot tilted right on wok ring" />
+          </div>
+          <div class="step-photo-grid" style="margin-top:10px;">
+            <img src="imgs/claypot-tilt-front.jpeg" alt="Pot tilted forward on wok ring" />
+            <img src="imgs/claypot-tilt-back.jpeg" alt="Pot tilted back on wok ring" />
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="step-num">10</div>
+        <div class="step-body">
+          <div class="step-title">Return Flat, Turn Off Flame &amp; Add Finishing Soy Sauce</div>
+          <div class="step-text">
+            Return the pot to a flat position on the burner. <strong>Turn the stove off completely.</strong> <strong>Do NOT open the lid.</strong> Now drizzle Lee Kum Kee Sweet Soy Sauce around the top edge of the lid &mdash; exactly the same motion as the cooking oil earlier. The sauce seeps down the sides, glazing the rice with that characteristic sweet-savory flavour. <strong>Let the pot rest undisturbed on the stove for 8 minutes.</strong> The residual heat finishes cooking the chicken gently.
+          </div>
+          <div class="step-photo-grid">
+            <img src="imgs/claypot-stove-off.jpeg" alt="Stove dial turned to zero" />
+            <img src="imgs/claypot-soysauce-lid.jpeg" alt="Drizzling Lee Kum Kee sweet soy sauce over the lid" />
+          </div>
+          <div class="warn-box" style="margin-top:14px;"><strong>Do not open the lid</strong> during the 8-minute rest. The steam inside is still cooking the chicken. Opening early lets it escape and leaves the top dry.</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="step-num">11</div>
+        <div class="step-body">
+          <div class="step-title">Open, Season &amp; Serve</div>
+          <div class="step-text">
+            After 8 minutes, open the lid. The reveal should be dramatic &mdash; steam rising, glistening toppings, a perfume of soy and sesame. Add more sweet soy sauce directly over the toppings to taste. Stir everything together gently, mixing the sauce and rendered lap cheong fat into the rice. Serve immediately, and make sure everyone gets a share of the bottom crust.
+          </div>
+          <div class="step-photo-grid">
+            <img src="imgs/claypot-finished-open.jpeg" alt="The finished clay pot rice revealed" />
+            <img src="imgs/claypot-finished-serve.jpeg" alt="Serving the clay pot rice" />
+          </div>
+          <div class="tip-box" style="margin-top:14px;"><strong>The bottom:</strong> Use a spoon to scrape the golden crust from the sides and bottom &mdash; that is the best bite in the pot.</div>
+        </div>
+      </li>
+
+    </ol>
+
+    <hr class="divider" />
+
+    <div class="section-head"><span class="num">03</span><h2>Chef's Notes</h2></div>
+
+    <div class="notes-grid">
+      <div class="note-card">
+        <div class="icon">&#127859;</div>
+        <h4>The Rice Is Non-Negotiable</h4>
+        <p>Taishan Simiao (&#21488;&#23665;&#20134;&#33609;&#31859;) is the only rice Ken uses. Its slender grain tolerates the high heat and develops crust without going mushy. Regular jasmine rice will work in a pinch, but the texture will be softer.</p>
+      </div>
+      <div class="note-card">
+        <div class="icon">&#9201;</div>
+        <h4>The Fridge Step Is Real</h4>
+        <p>Refrigerating the soaked rice sounds strange, but it removes that unpredictable layer of surface moisture. Your 2&frac34; cup water ratio becomes reliable and repeatable after this step.</p>
+      </div>
+      <div class="note-card">
+        <div class="icon">&#128293;</div>
+        <h4>Heat Level Is Stove-Specific</h4>
+        <p>Ken uses level 4 for the covered cook. Your stove may run hotter or cooler. First run: open the lid at 6 minutes and check. If rice seems undercooked, add 2 min; if it smells like burning, drop to level 3 next time.</p>
+      </div>
+      <div class="note-card">
+        <div class="icon">&#129752;</div>
+        <h4>The Wok Ring</h4>
+        <p>The ring is essential for the tilt sequence &mdash; it gives the rounded clay pot a stable cradle at an angle. Without it, the pot sits flat and you only crisp the very bottom, not the sides.</p>
+      </div>
+      <div class="note-card">
+        <div class="icon">&#127370;</div>
+        <h4>Lap Cheong Does Two Jobs</h4>
+        <p>The sausage flavours the marinade, and its fat renders during cooking and seeps into the rice. It is not just a topping &mdash; it is a seasoning agent. Don't skip it.</p>
+      </div>
+      <div class="note-card">
+        <div class="icon">&#127973;</div>
+        <h4>Variations</h4>
+        <p>The topping is flexible: try salted fish and pork belly (the classic), frog legs, or a simple egg cracked in at step 10 before covering. The rice technique stays exactly the same.</p>
+      </div>
+    </div>
+
+    <div class="scaling-box">
+      <h3>Scaling This Recipe</h3>
+      <p>The base recipe uses 3 cups of rice and fits a standard-sized clay pot. To scale up, you need a larger pot &mdash; the rice layer must remain roughly the same depth for even cooking.</p>
+      <div class="scale-controls">
+        <button class="scale-btn active" onclick="setScale(this, 1)">3 cups rice (Serves 3&ndash;4, Base)</button>
+        <button class="scale-btn" onclick="setScale(this, 2)">6 cups rice (Serves 6&ndash;8) &mdash; larger pot required</button>
+      </div>
+      <div class="scale-note" id="scale-note">Base: 3 cups rice, 2&frac34; cups water, 400&ndash;500g toppings. Water ratio stays at 2&frac34; per 3 cups of rice.</div>
+    </div>
+
+  </div>
+
+  <div class="back-bar">
+    <a href="index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"/></svg>
+      Back to All Recipes
+    </a>
+  </div>
+
+  <footer>
+    <strong>Ken's Kitchen</strong> &middot; Recipe No. 003 &middot; &#29934;&#20855;&#39354;<br/>
+    &#39151;&#22312;&#23478;&#20013;&#65292;&#21619;&#22312;&#24515;&#35041;
+  </footer>
+
+  <script>
+    (function () {
+      const FRAC_VALS = { '½': 0.5, '¼': 0.25, '¾': 0.75, '⅓': 1/3, '⅔': 2/3, '⅛': 0.125, '⅜': 0.375, '⅝': 0.625, '⅞': 0.875, '⅙': 1/6 };
+      const FRAC_MAP = [[0.125,'⅛'],[0.1667,'⅙'],[0.25,'¼'],[0.3333,'⅓'],[0.375,'⅜'],[0.5,'½'],[0.625,'⅝'],[0.6667,'⅔'],[0.75,'¾'],[0.875,'⅞']];
+      const FC = Object.keys(FRAC_VALS).join('');
+      const LEAD_RE = new RegExp('^(~?)\\s*(\\d+(?:\\.\\d+)?)\\s*([' + FC + '])?(.*)', 's');
+      const RANGE_RE = new RegExp('^(~?)(\\d+(?:\\.\\d+)?)\\s*[–\\-](\\d+(?:\\.\\d+)?)(.*)', 's');
+
+      function nearFrac(f) {
+        for (const [fv, fs] of FRAC_MAP) if (Math.abs(f - fv) < 0.04) return fs;
+        return null;
+      }
+      function fmtNum(val, approx) {
+        const p = approx ? '~' : '';
+        if (val <= 0) return p + '0';
+        const w = Math.floor(val), fr = val - w;
+        if (fr < 0.02) return p + w;
+        const fs = nearFrac(fr);
+        if (fs) return p + (w > 0 ? w : '') + fs;
+        if (val >= 100) return p + Math.round(val);
+        if (val >= 10) return p + (Math.round(val * 10) / 10);
+        return p + (Math.round(val * 100) / 100);
+      }
+      function scaleQty(base, factor) {
+        if (factor === 1) return base;
+        const rm = base.match(RANGE_RE);
+        if (rm) return fmtNum(parseFloat(rm[2]) * factor, rm[1]==='~') + '–' + fmtNum(parseFloat(rm[3]) * factor, false) + rm[4];
+        const m = base.match(LEAD_RE);
+        if (m && (m[2] || m[3])) {
+          const val = (m[2] ? parseFloat(m[2]) : 0) + (m[3] ? (FRAC_VALS[m[3]] || 0) : 0);
+          if (val > 0) return fmtNum(val * factor, m[1]==='~') + m[4];
+        }
+        return base;
+      }
+
+      const SCALE_NOTES = {
+        1: 'Base: 3 cups rice, 2¾ cups water, 400–500g toppings. Water ratio stays at 2¾ per 3 cups of rice.',
+        2: 'Scaled to 2× — 6 cups rice, 5½ cups water, 800–1000g toppings. Requires a larger clay pot. Rotation timing stays the same.'
+      };
+
+      window.setScale = function (btn, factor) {
+        document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.ingredient-table tr').forEach(row => {
+          const cells = row.querySelectorAll('td');
+          if (cells.length < 2) return;
+          const qtyCell = cells[cells.length - 1];
+          if (!qtyCell.hasAttribute('data-base')) qtyCell.setAttribute('data-base', qtyCell.textContent.trim());
+          qtyCell.textContent = scaleQty(qtyCell.getAttribute('data-base'), factor);
+        });
+        const el = document.getElementById('scale-note');
+        if (el) el.textContent = SCALE_NOTES[factor] || '';
+      };
+    })();
+  </script>
+</body>
+</html>
