@@ -177,3 +177,18 @@ Format for warning:
 - **No account numbers on page** — only where to find them
 - **Future task:** Secure digital document storage solution (Phase 2)
 - **Full project brief:** `memory/2026-03-26.md`
+## 網頁部署策略（2026-04-15）
+- **決策：放棄 GitHub Pages 自動部署，改用 MiniMax deploy 服務**
+- 原因：GitHub Actions 的 OIDC/token 權限限制，個人帳號無法自動寫入 gh-pages 分支
+- GitHub repo 繼續作為代碼庫備份，但不发佈網頁
+- MiniMax deploy 是默認發布方式，每次代碼更新後重新 deploy 即可
+- 缺點：URL 可能因每次部署而變化
+- **待解決：綁定固定子網域或告知 Ken 需更新收藏**
+
+## GitHub Tokens（已測試）
+- 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 — 可用於 API 管理
+- 無法通過 Actions 自動部署，權限限制
+
+## 譚氏傳承錄（2026-03-26）
+- GitHub repo: ktamxl/family-legacy（私人）
+- 網頁現為 MiniMax 部署
