@@ -99,6 +99,14 @@ Format for warning:
 - 出生：1963-06-26 9:00 AM 香港（農曆五月初六）
 - 詳細研究檔：/workspace/memory/bazi_study.md
 
+## Weather Desk (Morning Intelligence Briefing)
+- Cron job active: ID `ab347895-0731-464c-afde-d192a44a1f10`
+- Schedule: **Mon–Fri 5:00 AM Pacific** → posts to #meeting (Discord)
+- Briefing protocol: `/workspace/memory/weather_desk.md`
+- Assets watched: Gold, Hang Seng, USD/CNY, US10Y, VIX, S&P500 Futures, Dow Futures, Nasdaq Futures, Brent Crude, Fed Funds
+- Alert levels: 🟢 GREEN / 🟡 AMBER / 🔴 RED
+- Weekend: Markets closed, no briefing
+
 ## Excel Plumbing — Bookkeeper Role (started 2026-03-15)
 - Company: Excel Plumbing Supply + Showroom, 659 S Van Ness Ave, SF CA 94110
 - Phone: 415-863-8889 | Fax: 415-863-8870
@@ -140,6 +148,18 @@ Format for warning:
 - Telegram bot connected: token configured, Ken approved
 - Memory files: /workspace/memory/YYYY-MM-DD.md
 - Documents: burial_report.pdf, burial_diagram2.pdf in /workspace/
+
+## 近期重要財務活動（2026年4月15-16日）
+- **April 15日 Fidelity大額減持交易（已全部完成）：**
+  - Ken Investment (****2795): GLD 300股 @~$416, SLV全部4,000股, IXC全部1,000股 → SPAXX
+  - Rollover IRA (****2756): GLDM全部, SLV全部 → SPAXX
+  - Excel Reserve (****3922): GLD 500股 @~$416, SLV全部2,000股 → SPAXX
+  - **合計 raise cash 約 ~$838K → SPAXX（現金乾火藥）**
+- **Excel Reserve Fund SCHP止損共識（Monday 2026-04-21執行）：**
+  - SCHP 虧損 -$74,664（-$496K cost, -15%），止損換STIP
+  - Win + Jade 的一致建議：果斷止損
+- **帳戶遮蔽：** family-legacy repository 已改 private，帳戶號碼已masked
+- **FHKCX vs MCHI：** FHKCX跑贏MCHI，原因待確認（宏觀考慮中伊戰爭/美長債拋售）
 
 ## 風水報告重寫任務（2026-03-12）
 - 第一版 burial_report.pdf 失敗：中文字體缺失、內容太像清單/bullet points
