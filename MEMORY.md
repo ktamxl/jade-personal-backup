@@ -161,6 +161,18 @@ Format for warning:
 - **帳戶遮蔽：** family-legacy repository 已改 private，帳戶號碼已masked
 - **FHKCX vs MCHI：** FHKCX跑贏MCHI，原因待確認（宏觀考慮中伊戰爭/美長債拋售）
 
+## AI Investment Thesis (2026-04-24 — Major Breakthrough)
+- Complete thesis saved: `/workspace/memory/ai_investment_thesis.md`
+- Key principle: "This is a long race. Don't count China out."
+- HALO framework: Heavy Assets, Low Obsolescence, national champions
+- Three competing theses: Patel (sanctions work), Jensen (CUDA moat), Zhang Chi (gap widening)
+- DeepSeek R2 = key decider event
+- BYD parallel: if DeepSeek goes CUDA = BYD export model = global scale
+- N2U TSMC: Jensen's affordable chip for global market, CUDA moat > chip
+- CUDA moat = 5 layers: chip, kernel/driver, compiler/runtime, libraries, ecosystem
+- Ken holds NO Nvidia/TSMC — deliberate, ensures clean analysis
+- Watchtower: `/workspace/memory/watchtower.md`
+
 ## 風水報告重寫任務（2026-03-12）
 - 第一版 burial_report.pdf 失敗：中文字體缺失、內容太像清單/bullet points
 - 新報告要求：**全繁體中文**、散文敘事風格、有文學深度

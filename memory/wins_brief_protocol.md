@@ -25,7 +25,6 @@ Steps:
 ### 3. Scan Ken's positions (5 min)
 - Check for any positions showing unusual P&L swings (beyond normal daily range)
 - Flag any positions at new 52-week highs or lows
-- Check JD.com cash proceeds (HKD ~234K) — hold for now unless Ken initiates redeployment
 
 ### 4. Compile brief (5 min)
 
