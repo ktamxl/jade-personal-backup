@@ -107,28 +107,6 @@ Format for warning:
 - Alert levels: 🟢 GREEN / 🟡 AMBER / 🔴 RED
 - Weekend: Markets closed, no briefing
 
-## Excel Plumbing — Bookkeeper Role (started 2026-03-15)
-- Company: Excel Plumbing Supply + Showroom, 659 S Van Ness Ave, SF CA 94110
-- Phone: 415-863-8889 | Fax: 415-863-8870
-- Bookkeeper email: payable@excel-plumbing.com
-- ERP: Epicor Eclipse | ACH via Routable.com
-- Routable Payment ID: `3d309cb1-71a6-4b98-940e-5e7f6c3eac09`
-- Weekly task: every Sunday (SF time) — process ACH CSV, return corrected file
-- CSV fixes: date format MM/DD/YYYY→YYYY-MM-DD, Payment from* ID, delete total row
-- All business dates/times in PDT (GMT-7)
-
-## AI投資主題（2026-03-16確立）
-- 完整備忘：`/workspace/memory/ai_investment_thesis.md`
-- Ken的核心thesis：AI邊際成本趨零 ≠ 製造業；中國製造+AI+14億人消費 = 爆炸性生產力
-- 最高conviction：MiniMax(00100) + 智譜AI(02513) — 純AI Agent play
-- 觀察：快手Kling(01024)被低估；百度(09888)長線存疑
-- 策略：集中加碼而非分散，等回調才出手
-
-## MaxClaw Subscription Setup
-- **Personal Sisi (this instance):** ULTRA subscription — Ken's personal account
-- **Sisi MaxClaw (Excel Plumbing):** Excel Workspace with 3 team membership — separate billing
-- Credits are 100% separate — no shared pool between personal and business
-
 ## System Setup
 - **Status card:** Show formatted session_status card at the start of EVERY session (not just on "status" command). Format from Excel MaxClaw Sisi's template:
   ```
