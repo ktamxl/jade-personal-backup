@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zhujiajiao Walking Map — Tam Family China 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --zj-green: #2d4a1e; --zj-mid: #5a8a3a; --zj-lt: #e8f0e0;
+    --gold: #c9a84c; --gold-lt: #f0d98a;
+    --ink: #1a1a2e; --soft: #f5f2ec; --white: #ffffff;
+    --radius: 14px; --shadow: 0 6px 28px rgba(0,0,0,.13);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: Georgia,'Times New Roman',serif; background: var(--zj-lt); color: var(--ink); line-height: 1.7; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg,#1a2e0e 0%,#2d4a1e 55%,#4a7030 100%);
+    color: #fff; text-align: center; padding: 52px 24px 40px;
+  }
+  .hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold-lt); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; padding:3px 14px; border-radius:20px; margin-bottom:14px; }
+  .hero h1 { font-size:clamp(1.6rem,5vw,2.6rem); font-weight:normal; letter-spacing:.02em; margin-bottom:6px; }
+  .hero-sub { font-size:.9rem; opacity:.8; }
+  .hero-stats { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-top:16px; }
+  .hero-stat { text-align:center; }
+  .hero-stat .val { font-size:1.4rem; font-weight:bold; color:var(--gold-lt); display:block; font-family:sans-serif; }
+  .hero-stat .lab { font-size:.65rem; opacity:.65; text-transform:uppercase; letter-spacing:.1em; font-family:sans-serif; }
+
+  /* ── STICKY NAV ── */
+  .sticky-nav { position:sticky; top:0; z-index:100; background:var(--zj-green); display:flex; justify-content:center; overflow-x:auto; scrollbar-width:none; }
+  .sticky-nav::-webkit-scrollbar { display:none; }
+  .sticky-nav a { color:rgba(255,255,255,.72); text-decoration:none; font-family:sans-serif; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; padding:11px 14px; white-space:nowrap; border-bottom:2px solid transparent; transition:all .2s; }
+  .sticky-nav a:hover { color:var(--gold-lt); }
+  .sticky-nav a.active { color:var(--gold-lt); border-bottom-color:var(--gold-lt); }
+
+  /* ── ROUTE SUMMARY BAR ── */
+  .route-bar { background:var(--zj-green); color:#fff; padding:14px 24px; overflow-x:auto; scrollbar-width:none; }
+  .route-bar::-webkit-scrollbar { display:none; }
+  .route-bar-inner { display:flex; gap:0; align-items:center; min-width:max-content; justify-content:center; }
+  .route-step { display:flex; align-items:center; gap:5px; font-family:sans-serif; font-size:.68rem; color:rgba(255,255,255,.55); white-space:nowrap; }
+  .route-step .num { width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; font-size:.6rem; flex-shrink:0; }
+  .route-step .arrow { color:rgba(255,255,255,.3); padding:0 4px; font-size:.8rem; }
+  .route-step.current { color:var(--gold-lt); }
+  .route-step.current .num { background:var(--gold-lt); color:var(--zj-green); }
+
+  /* ── SECTION ── */
+  .section { max-width:900px; margin:0 auto; padding:0 20px 40px; }
+
+  /* ── STOP CARD ── */
+  .stop-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:16px; overflow:hidden; display:grid; grid-template-columns:72px 1fr; transition:transform .2s; }
+  .stop-card:hover { transform:translateY(-2px); }
+  .stop-num { display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--zj-mid); color:#fff; font-family:sans-serif; padding:16px 8px; text-align:center; min-height:100px; }
+  .stop-num .n { font-size:1.5rem; font-weight:bold; line-height:1; }
+  .stop-num .label { font-size:.55rem; opacity:.7; text-transform:uppercase; letter-spacing:.05em; margin-top:4px; }
+  .stop-body { padding:18px 20px 16px 16px; }
+  .stop-body h3 { font-size:1.05rem; font-weight:normal; margin-bottom:4px; color:var(--ink); }
+  .stop-body .chinese { font-size:.78rem; color:var(--zj-mid); font-family:sans-serif; margin-bottom:8px; }
+  .stop-body p { font-size:.84rem; opacity:.72; margin-bottom:8px; }
+  .stop-tags { display:flex; flex-wrap:wrap; gap:5px; }
+  .stop-tag { display:inline-block; font-size:.6rem; padding:2px 8px; border-radius:20px; font-family:sans-serif; background:var(--zj-lt); color:var(--zj-green); }
+  .stop-tag.highlight { background:var(--gold); color:var(--ink); }
+
+  /* ── MAP SECTION ── */
+  .map-section { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; margin-bottom:20px; }
+  .map-header { padding:16px 20px; border-bottom:1px solid rgba(0,0,0,.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+  .map-header h3 { font-size:.9rem; font-weight:normal; color:var(--ink); }
+  .map-header-links { display:flex; gap:10px; flex-wrap:wrap; }
+  .map-btn { display:inline-flex; align-items:center; gap:5px; padding:6px 14px; border-radius:6px; font-size:.72rem; font-family:sans-serif; text-decoration:none; font-weight:bold; transition:all .2s; }
+  .map-btn.amap { background:#1dad19; color:#fff; }
+  .map-btn.baidu { background:#2196F3; color:#fff; }
+  .map-btn.qq { background:#00be00; color:#fff; }
+  .map-btn:hover { opacity:.85; transform:translateY(-1px); }
+  .map-embed { height:340px; background:var(--zj-lt); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px; color:var(--zj-green); font-family:sans-serif; }
+  .map-placeholder { text-align:center; }
+  .map-placeholder .map-icon { font-size:2.5rem; display:block; margin-bottom:6px; }
+  .map-embed-text { font-size:.8rem; opacity:.7; margin-top:4px; text-align:center; max-width:260px; line-height:1.5; }
+
+  /* ── PRACTICAL TIPS ── */
+  .tips { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; margin-bottom:20px; }
+  .tips h3 { font-size:1rem; font-weight:normal; margin-bottom:14px; }
+  .tips-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+  .tip-item { display:flex; align-items:flex-start; gap:10px; font-size:.82rem; }
+  .tip-icon { font-size:1.1rem; flex-shrink:0; margin-top:2px; }
+  .tip-item .tip-title { font-family:sans-serif; font-weight:bold; color:var(--ink); font-size:.78rem; display:block; margin-bottom:2px; }
+  .tip-item .tip-desc { opacity:.65; }
+
+  /* ── DIRECTION BADGE ── */
+  .dir-badge { display:inline-block; font-size:.62rem; font-family:sans-serif; letter-spacing:.08em; text-transform:uppercase; padding:2px 8px; border-radius:3px; margin-bottom:14px; }
+  .dir-badge.north { background:#d0e4c0; color:var(--zj-green); }
+  .dir-badge.south { background:#ffe8b0; color:#7a5a00; }
+  .dir-badge.both { background:#e8d0f0; color:#5a2a7a; }
+
+  /* ── FOOTER ── */
+  footer { text-align:center; padding:28px 24px; font-family:sans-serif; font-size:.72rem; opacity:.4; color:var(--ink); margin-top:16px; }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-badge">Zhujiajiao · 青浦朱家角</div>
+  <h1>🌸 Walking Route Map</h1>
+  <p class="hero-sub">12 Must-See Stops · North to South · 1.6 km · 4–5 Hours</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="val">12</span><span class="lab">Stops</span></div>
+    <div class="hero-stat"><span class="val">1.6 km</span><span class="lab">Walking</span></div>
+    <div class="hero-stat"><span class="val">4–5 hrs</span><span class="lab">Duration</span></div>
+    <div class="hero-stat"><span class="val">¥0</span><span class="lab">Entry (streets)</span></div>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="sticky-nav">
+  <a href="attractions.html">← Attractions</a>
+  <a href="#map">🗺️ Maps</a>
+  <a href="#stops">🚶 Route</a>
+  <a href="#tips">💡 Tips</a>
+</nav>
+
+<!-- ── ROUTE FLOW BAR ── -->
+<div class="route-bar">
+  <div class="route-bar-inner" id="route-bar">
+    <div class="route-step current" data-stop="1"><div class="num">1</div>Tourist Center</div>
+    <div class="route-step"><div class="num">2</div>Kezhi Garden</div>
+    <div class="route-step"><div class="num">3</div>Hexin Garden</div>
+    <div class="route-step"><div class="num">4</div>Yong'an Bridge</div>
+    <div class="route-step"><div class="num">5</div>Apo Tea House</div>
+    <div class="route-step"><div class="num">6</div>Fangsheng Bridge</div>
+    <div class="route-step"><div class="num">7</div>North Street</div>
+    <div class="route-step"><div class="num">8</div>Helong Art Mus.</div>
+    <div class="route-step"><div class="num">9</div>Tai'an Bridge</div>
+    <div class="route-step"><div class="num">10</div>Yuanjin Temple</div>
+    <div class="route-step"><div class="num">11</div>City God Temple</div>
+    <div class="route-step"><div class="num">12</div>Great Qing Post</div>
+  </div>
+</div>
+
+<!-- ── MAPS ── -->
+<div class="section" id="map">
+  <div class="map-section">
+    <div class="map-header">
+      <h3>🗺️ Navigate with 高德地图 (Amap)</h3>
+      <a class="map-btn amap" href="https://www.amap.com/search?query=朱家角古镇&city=310000" target="_blank" rel="noopener">🔍 Search in Amap →</a>
+    </div>
+    <div class="map-embed">
+      <div class="map-placeholder">
+        <span class="map-icon">🗺️</span>
+        <strong>Zhujiajiao Ancient Town · 青浦朱家角</strong>
+        <div style="font-family:sans-serif; font-size:.82rem; color:#2d4a1e; margin:6px 0 4px;">📍 31.009°N · 121.052°E</div>
+        <div class="map-embed-text">Open <strong>高德地图 (Amap)</strong> app on your phone and search <strong>朱家角古镇</strong> — tap Directions to navigate from your current location.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ROUTE HEADER ── -->
+  <div style="margin-top:16px; margin-bottom:4px;">
+    <h2 style="font-size:1.4rem; font-weight:normal; margin-bottom:4px;">🚶 The 12-Stop Walking Route</h2>
+    <p style="font-size:.82rem; opacity:.6; margin-bottom:20px; font-family:sans-serif;">North to South · ~1.6 km · Start Stop 1 → Finish Stop 12</p>
+  </div>
+
+  <!-- Stop 1 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">1</span><span class="label">START</span></div>
+    <div class="stop-body">
+      <div class="dir-badge north">North · Entry Point</div>
+      <h3>遊客中心</h3>
+      <div class="chinese">Tourist Center · 课植园路 555号</div>
+      <p>Start your walk here. Grab a map, store luggage, and use the restroom before heading in. Free entry to the ancient town streets.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">📍 Start Here</span>
+        <span class="stop-tag">🚻 Restroom</span>
+        <span class="stop-tag">🅿️ Parking</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 2 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">2</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>課植園</h3>
+      <div class="chinese">Kezhi Garden · 課植園路</div>
+      <p>Zhujiajiao's crown jewel. A private Qing Dynasty garden built by a magistrate — named after the motto "study farming, plant trees." The finest classical garden in the water town. Optional ticket (¥40).</p>
+      <div class="stop-tags">
+        <span class="stop-tag">🌿 Garden</span>
+        <span class="stop-tag">🏛️ Heritage</span>
+        <span class="stop-tag">📸 Photo Spot</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 3 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">3</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>和心園</h3>
+      <div class="chinese">Hexin Garden · 西湖街</div>
+      <p>A traditional garden perfect for a break. Try on Hanfu costume rental, enjoy a pot of local tea, or simply rest your feet before continuing south.</p>
+      <div class="stop-tags">
+        <span class="stop-tag">🍵 Tea House</span>
+        <span class="stop-tag">👘 Hanfu Rental</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 4 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">4</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>永安橋</h3>
+      <div class="chinese">Yong'an Bridge · 永安桥</div>
+      <p>The iconic stone arch bridge. One of the most photographed spots in Zhujiajiao — classic water town framing with boats and reflections below. Best shot: from either bank looking toward the bridge.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">📸 Signature Shot</span>
+        <span class="stop-tag">🌉 Bridge</span>
+        <span class="stop-tag">🚣 Boat View</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 5 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">5</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>阿婆茶樓</h3>
+      <div class="chinese">Apo Tea House · 北大街 125号</div>
+      <p>A 100-year-old tea house on the second floor overlooking the river. Famous for "阿婆茶" (Grandma Tea) — local tea with rice wine and osmanthus cakes. Steep wooden stairs, charming atmosphere.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">☕ Must-Do</span>
+        <span class="stop-tag">🧁 Local Snack</span>
+        <span class="stop-tag">📸 Iconic View</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 6 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">6</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>放生橋</h3>
+      <div class="chinese">Fangsheng Bridge · 放生桥</div>
+      <p>The tallest and longest stone bridge in Zhujiajiao. Built in 1625 (Ming Dynasty). The landmark of the ancient town — 5 vaulted arches, commanding views up and down the漕港河. Best at sunrise or just before sunset.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">⭐ Signature Shot</span>
+        <span class="stop-tag">🌉 Ming Dynasty</span>
+        <span class="stop-tag">📸 Golden Hour</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 7 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">7</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>北大街</h3>
+      <div class="chinese">North Street · 北大街</div>
+      <p>The 1,000-meter Ming Dynasty shopping street — one of the "nine long streets" of Zhujiajiao. Lined with作坊 shops, snack stalls (try the 粽子 rice dumplings), and craft stores. Narrow and lively.</p>
+      <div class="stop-tags">
+        <span class="stop-tag">🍜 Street Food</span>
+        <span class="stop-tag">🎁 Souvenirs</span>
+        <span class="stop-tag">🏮 Old Street</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 8 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">8</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>鶴龍美術館</h3>
+      <div class="chinese">Helong Art Museum · 北大街 168号</div>
+      <p>A private art museum showcasing Chinese calligraphy, ink paintings, and traditional culture exhibitions. Air-conditioned and quiet — a peaceful stop after the busy street. Free or small donation.</p>
+      <div class="stop-tags">
+        <span class="stop-tag">🎨 Art</span>
+        <span class="stop-tag">🖌️ Calligraphy</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 9 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">9</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>泰安橋</h3>
+      <div class="chinese">Tai'an Bridge · 泰安桥</div>
+      <p>One of the oldest bridges in Zhujiajiao. The stone arch creates a perfect natural frame for water reflections. The best reflection photography spot in the ancient town — aim for calm morning or evening.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">📸 Best Reflection Shot</span>
+        <span class="stop-tag">🌉 Oldest Bridge</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 10 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">10</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>圓津禪院</h3>
+      <div class="chinese">Yuanjin Zen Temple · 圆津禅院</div>
+      <p>A Qing Dynasty temple floating over the water — one of the most atmospheric spots in Zhujiajiao. Beautiful Buddhist art inside and serene waterside corridors. Small temple entry fee (¥10).</p>
+      <div class="stop-tags">
+        <span class="stop-tag">🛕 Temple</span>
+        <span class="stop-tag">🪷 Buddhist Art</span>
+        <span class="stop-tag">📸 Scenic</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 11 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">11</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>城隍廟</h3>
+      <div class="chinese">City God Temple · 城隍庙</div>
+      <p>The oldest and most revered temple in Zhujiajiao. Built during the Song Dynasty, reconstructed in the Qing. The stone courtyard and carved beams are extraordinary. Atmospheric during festivals.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🏛️ Ancient</span>
+        <span class="stop-tag">🛕 Temple</span>
+        <span class="stop-tag">📸 Architecture</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 12 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">12</span><span class="label">END</span></div>
+    <div class="stop-body">
+      <div class="dir-badge south">South · Final Stop</div>
+      <h3>大清郵局</h3>
+      <div class="chinese">Great Qing Post Office · 漕河街 187号</div>
+      <p>Zhujiajiao's original Qing Dynasty post office (1896). Step inside to buy postcards and stamp your own custom Zhujiajiao postmark — a perfect keepsake to send to friends and family back home.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">📮 Send a Postcard!</span>
+        <span class="stop-tag">🏛️ Heritage</span>
+        <span class="stop-tag">📸 Historical</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── PRACTICAL TIPS ── -->
+<div class="section" id="tips">
+  <div class="tips">
+    <h3>💡 Practical Tips</h3>
+    <div class="tips-grid">
+      <div class="tip-item"><span class="tip-icon">🚇</span><div><span class="tip-title">Metro</span><span class="tip-desc">Line 17 → Zhujiajiao Station, Exit 1 → 1.5km walk</span></div></div>
+      <div class="tip-item"><span class="tip-icon">🅿️</span><div><span class="tip-title">Parking</span><span class="tip-desc">課植園 Parking Lot · ¥15/day</span></div></div>
+      <div class="tip-item"><span class="tip-icon">🕐</span><div><span class="tip-title">Hours</span><span class="tip-desc">Streets: 24 hrs · Attractions: 8:30–17:00</span></div></div>
+      <div class="tip-item"><span class="tip-icon">👟</span><div><span class="tip-title">Shoes</span><span class="tip-desc">Wear comfortable flat shoes — cobblestones</span></div></div>
+      <div class="tip-item"><span class="tip-icon">🎫</span><div><span class="tip-title">Tickets</span><span class="tip-desc">Streets FREE · 3-attraction combo ¥60 (optional)</span></div></div>
+      <div class="tip-item"><span class="tip-icon">📦</span><div><span class="tip-title">Luggage</span><span class="tip-desc">Tourist Center offers bag storage</span></div></div>
+      <div class="tip-item"><span class="tip-icon">🍜</span><div><span class="tip-title">Food</span><span class="tip-desc">Try 粽子, 炸臭豆腐, 糖藕 on North Street</span></div></div>
+      <div class="tip-item"><span class="tip-icon">🌙</span><div><span class="tip-title">Night</span><span class="tip-desc">Lantern-lit evening is magical — stay for dinner</span></div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Tam Family China Adventure 2026 · Zhujiajiao Walking Route · Prepared by Jade 💚
+</footer>
+
+<script>
+  // Scroll-based active nav + route bar highlight
+  const stops = document.querySelectorAll('.stop-card');
+  const routeSteps = document.querySelectorAll('.route-step');
+  const stopObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = Array.from(stops).indexOf(entry.target);
+        routeSteps.forEach((s, i) => s.classList.toggle('current', i === idx));
+      }
+    });
+  }, { threshold: 0.4, rootMargin: '-20% 0px -40% 0px' });
+  stops.forEach(s => stopObserver.observe(s));
+</script>
+</body>
+</html>

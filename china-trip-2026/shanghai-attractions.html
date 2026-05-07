@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shanghai Attractions — Tam Family China 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sh-dark: #0d3d4f; --sh-mid: #1a6880; --sh-lt: #e8f4f8;
+    --gold: #c9a84c; --gold-lt: #f0d98a;
+    --ink: #1a1a2e; --soft: #f5f2ec; --white: #ffffff;
+    --radius: 14px; --shadow: 0 4px 24px rgba(0,0,0,.13);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: Georgia,'Times New Roman',serif; background: var(--sh-lt); color: var(--ink); line-height: 1.7; }
+
+  /* ── HERO ── */
+  .hero { background: linear-gradient(160deg,#061e2d 0%,#0d3d4f 55%,#1a6880 100%); color:#fff; text-align:center; padding:52px 24px 40px; }
+  .hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold-lt); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; padding:3px 14px; border-radius:20px; margin-bottom:14px; }
+  .hero h1 { font-size:clamp(1.6rem,5vw,2.6rem); font-weight:normal; letter-spacing:.02em; margin-bottom:6px; }
+  .hero-sub { font-size:.9rem; opacity:.8; }
+  .hero-stats { display:flex; justify-content:center; gap:28px; flex-wrap:wrap; margin-top:16px; }
+  .hero-stat { text-align:center; }
+  .hero-stat .val { font-size:1.4rem; font-weight:bold; color:var(--gold-lt); display:block; font-family:sans-serif; }
+  .hero-stat .lab { font-size:.65rem; opacity:.65; text-transform:uppercase; letter-spacing:.1em; font-family:sans-serif; }
+
+  /* ── STICKY NAV ── */
+  .sticky-nav { position:sticky; top:0; z-index:100; background:var(--sh-dark); display:flex; justify-content:center; overflow-x:auto; scrollbar-width:none; }
+  .sticky-nav::-webkit-scrollbar { display:none; }
+  .sticky-nav a { color:rgba(255,255,255,.72); text-decoration:none; font-family:sans-serif; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; padding:11px 14px; white-space:nowrap; border-bottom:2px solid transparent; transition:all .2s; }
+  .sticky-nav a:hover { color:var(--gold-lt); }
+  .sticky-nav a.active { color:var(--gold-lt); border-bottom-color:var(--gold-lt); }
+
+  /* ── SECTION ── */
+  .section { max-width:900px; margin:0 auto; padding:0 20px 40px; }
+
+  /* ── STOP CARD ── */
+  .stop-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:16px; overflow:hidden; display:grid; grid-template-columns:68px 1fr; transition:transform .2s; }
+  .stop-card:hover { transform:translateY(-2px); }
+  .stop-num { display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--sh-mid); color:#fff; font-family:sans-serif; padding:16px 8px; text-align:center; min-height:100px; }
+  .stop-num .n { font-size:1.4rem; font-weight:bold; line-height:1; }
+  .stop-num .label { font-size:.52rem; opacity:.7; text-transform:uppercase; letter-spacing:.05em; margin-top:4px; }
+  .stop-body { padding:18px 20px 16px 16px; }
+  .stop-body h3 { font-size:1.05rem; font-weight:normal; margin-bottom:4px; color:var(--ink); }
+  .stop-body .chinese { font-size:.78rem; color:var(--sh-mid); font-family:sans-serif; margin-bottom:8px; }
+  .stop-body p { font-size:.84rem; opacity:.72; margin-bottom:10px; }
+  .stop-tags { display:flex; flex-wrap:wrap; gap:5px; }
+  .stop-tag { display:inline-block; font-size:.6rem; padding:2px 8px; border-radius:20px; font-family:sans-serif; background:var(--sh-lt); color:var(--sh-dark); }
+  .stop-tag.highlight { background:var(--gold); color:var(--ink); }
+  .stop-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .stop-map-link { display:inline-flex; align-items:center; gap:5px; padding:5px 12px; background:#1dad19; color:#fff; border-radius:5px; font-size:.7rem; font-family:sans-serif; text-decoration:none; font-weight:bold; transition:all .2s; }
+  .stop-map-link:hover { opacity:.85; }
+  .stop-coords { font-family:sans-serif; font-size:.65rem; color:#888; }
+
+  /* ── MAP SECTION ── */
+  .map-section { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; margin-bottom:20px; }
+  .map-header { padding:16px 20px; border-bottom:1px solid rgba(0,0,0,.06); }
+  .map-header h3 { font-size:.9rem; font-weight:normal; color:var(--ink); }
+  .map-embed { background:var(--sh-lt); display:flex; align-items:center; justify-content:center; padding:32px 24px; flex-direction:column; gap:10px; }
+  .map-placeholder { text-align:center; max-width:360px; }
+  .map-placeholder .icon { font-size:2.5rem; display:block; margin-bottom:8px; }
+  .map-placeholder p { font-family:sans-serif; font-size:.82rem; opacity:.7; line-height:1.6; }
+  .map-link-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:4px; }
+  .map-link-btn { display:inline-flex; align-items:center; gap:5px; padding:8px 16px; background:#1dad19; color:#fff; border-radius:6px; font-size:.75rem; font-family:sans-serif; text-decoration:none; font-weight:bold; transition:all .2s; }
+  .map-link-btn:hover { opacity:.85; transform:translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer { text-align:center; padding:28px 24px; font-family:sans-serif; font-size:.72rem; opacity:.4; color:var(--ink); margin-top:16px; }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-badge">Shanghai · 上海</div>
+  <h1>🌆 Shanghai Attractions</h1>
+  <p class="hero-sub">10 curated highlights across the city · Day 1–5</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="val">10</span><span class="lab">Attractions</span></div>
+    <div class="hero-stat"><span class="val">5</span><span class="lab">Days</span></div>
+    <div class="hero-stat"><span class="val">Nov 23–27</span><span class="lab">Dates</span></div>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="sticky-nav">
+  <a href="attractions.html">← Attractions</a>
+  <a href="#map">🗺️ Maps</a>
+  <a href="#stops">🚶 All Stops</a>
+</nav>
+
+<!-- ── ALL STOPS ── -->
+<div class="section" id="stops">
+
+  <!-- Stop 1 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">1</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>The Bund Night View</h3>
+      <div class="chinese">外滩 · Waitan · 黄浦区中山东一路</div>
+      <p>Shanghai's most iconic skyline. The 1.5 km waterfront promenade on both sides of the Huangpu River — 52 Art Deco buildings from the 1930s. The view at dusk, when the lights come on, is genuinely unforgettable.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">⭐ Signature Night View</span>
+        <span class="stop-tag">🌃 Best at Night</span>
+        <span class="stop-tag">🚶 Free</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=外滩&city=310000" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 31.2418°N · 121.4906°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 2 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">2</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Yu Garden &amp; City God Temple</h3>
+      <div class="chinese">豫园 · 上海城隍庙 · 旧城区东北</div>
+      <p>Classical Ming Dynasty garden (built 1577) surrounded by the atmospheric old city. The adjacent City God Temple Market is perfect for souvenirs, street food, and appreciating traditional architecture. Allow 2–3 hours.</p>
+      <div class="stop-tags">
+        <span class="stop-tag">🏛️ Ming Dynasty</span>
+        <span class="stop-tag">🌿 Garden</span>
+        <span class="stop-tag">🍜 Street Food</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=豫园&city=310000" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 31.2242°N · 121.4855°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 3 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">3</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>French Concession · Anfu Road</h3>
+      <div class="chinese">法租界 · 安福路 · 徐汇区</div>
+      <p>Shanghai's most charming tree-lined neighbourhood. Anfu Road is the creative heart — boutique coffee shops, independent bookshops, fashion stores, and leafy villa-lined streets that feel a world away from the skyline.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">☕ Boutique Cafés</span>
+        <span class="stop-tag">🛍️ Shopping</span>
+        <span class="stop-tag">🏡 Tree-Lined Streets</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=安福路&city=310000" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 31.2238°N · 121.4518°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 4 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">4</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Shanghai Disney Resort</h3>
+      <div class="chinese">上海迪士尼度假区 · 浦东新区川沙新镇</div>
+      <p>China's first Disney resort — one of the world's largest and most technologically advanced. Features the largest Disney castle, a pirates-themed land, and the longest Disney parade route. Full day experience (8:30 AM – 9:30 PM).</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🎢 Full Day</span>
+        <span class="stop-tag">👨‍👩‍👧‍👦 Family</span>
+        <span class="stop-tag">🎠 Rides</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=上海迪士尼度假区&city=310000" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 31.1414°N · 121.6670°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 5 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">5</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Oriental Pearl Tower</h3>
+      <div class="chinese">东方明珠塔 · 浦东新区世纪大道1号</div>
+      <p>The symbol of modern Shanghai. 468 metres of steel and glass — the world's third-tallest TV tower. The observation decks at 259m and 351m give an unobstructed 360° view of the entire city. Open 9 AM – 9 PM daily.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">⭐ Iconic Landmark</span>
+        <span class="stop-tag">🏙️ 360° View</span>
+        <span class="stop-tag">📸 Photo Spot</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=东方明珠塔&city=310000" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 31.2420°N · 121.4950°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 6 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">6</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Shanghai Tower</h3>
+      <div class="chinese">上海中心大厦 · 浦东新区陆家嘴银城中路501号</div>
+      <p>The world's second-tallest building at 632 metres. The observation deck on the 118th floor (561m) is the highest in China. Next to the Oriental Pearl Tower and Shanghai World Financial Center — the three form the jaw-dropping Lujiazui skyline.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🏆 World's 2nd Tallest</span>
+        <span class="stop-tag">🏙️ Lujiazui</span>
+        <span class="stop-tag">📸 Best Skyline View</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=上海中心大厦&city=310000" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 31.2358°N · 121.5008°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 7 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">7</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Xintiandi</h3>
+      <div class="chinese">新天地 · 黄浦区太仓路/兴业路</div>
+      <p>Shanghai's most stylish dining and entertainment district. The entire area is built around restored Shikumen stone-gate townhouses — 1920s architecture merged with modern interiors. Lined with international restaurants, cocktail bars, and boutique shops.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🥃 Nightlife</span>
+        <span class="stop-tag">🍽️ Dining</span>
+        <span class="stop-tag">🏛️ Shikumen Architecture</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=新天地&city=310000" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 31.2238°N · 121.4629°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 8 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">8</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Jing'an Temple</h3>
+      <div class="chinese">靜安寺 · 靜安區南京西路1686號</div>
+      <p>One of the oldest Buddhist temples in Shanghai — originally built in 220 AD. Despite being surrounded by the city's most upscale shopping district (West Nanjing Road), the temple retains its spiritual atmosphere with ancient pagodas and incense-filled halls.</p>
+      <div class="stop-tags">
+        <span class="stop-tag">🛕 Temple</span>
+        <span class="stop-tag">🏛️ Ancient (220 AD)</span>
+        <span class="stop-tag">🪷 Incense</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=靜安寺&city=310000" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 31.2250°N · 121.4425°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 9 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">9</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Nanjing Road Pedestrian Street</h3>
+      <div class="chinese">南京路步行街 · 黄浦区南京东路558号</div>
+      <p>The world's busiest shopping street — "China's First Commercial Street." The 1.3 km fully pedestrianised stretch runs from the Bund to People's Square. Hundreds of international brands, department stores, and local specialties line both sides.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🛍️ Shopping</span>
+        <span class="stop-tag">🏮 Pedestrian Street</span>
+        <span class="stop-tag">🚶 Free</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=南京路步行街&city=310000" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 31.2362°N · 121.4809°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 10 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">10</span><span class="label">END</span></div>
+    <div class="stop-body">
+      <h3>Louis Vuitton Visionary Journeys</h3>
+      <div class="chinese">路易威登「非凡之旅」限时展 · 靜安區南京西路789號興業太古匯</div>
+      <p>A landmark immersive exhibition by Louis Vuitton, centred on the "The Louis" — the world's only ship-shaped concept space. Four themed zones exploring travel, craft, fashion, and innovation. Free entry with reservation. Located at Pulse 808 mall.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">👜 Luxury Exhibition</span>
+        <span class="stop-tag">🎨 Art & Fashion</span>
+        <span class="stop-tag">📸 Instagram Spot</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=兴业太古汇&city=310000" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 31.2334°N · 121.4547°E</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── MAP OVERVIEW ── -->
+<div class="section" id="map">
+  <div class="map-section">
+    <div class="map-header">
+      <h3>🗺️ Navigate Shanghai — Open All Pins in Amap</h3>
+    </div>
+    <div class="map-embed">
+      <div class="map-placeholder">
+        <span class="icon">🌆</span>
+        <p><strong>Open each stop in 高德地图 (Amap)</strong><br>Tap any stop's green button above to search it directly in Amap.<br>To view all stops at once, copy the coordinates below into Amap's coordinate search.</p>
+      </div>
+    </div>
+    <div style="background:var(--sh-lt); padding:16px 20px; border-top:1px solid rgba(0,0,0,.06);">
+      <p style="font-family:sans-serif; font-size:.75rem; color:#555; margin-bottom:10px;"><strong>📍 All 10 Coordinates (copy into Amap):</strong></p>
+      <div style="display:flex; flex-direction:column; gap:4px;">
+        <div style="font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:5px 8px; border-radius:4px;">1. 外滩 · 31.2418, 121.4906</div>
+        <div style="font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:5px 8px; border-radius:4px;">2. 豫园 · 31.2242, 121.4855</div>
+        <div style="font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:5px 8px; border-radius:4px;">3. 安福路 · 31.2238, 121.4518</div>
+        <div style="font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:5px 8px; border-radius:4px;">4. 迪士尼度假区 · 31.1414, 121.6670</div>
+        <div style="font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:5px 8px; border-radius:4px;">5. 东方明珠塔 · 31.2420, 121.4950</div>
+        <div style="font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:5px 8px; border-radius:4px;">6. 上海中心大厦 · 31.2358, 121.5008</div>
+        <div style="font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:5px 8px; border-radius:4px;">7. 新天地 · 31.2238, 121.4629</div>
+        <div style="font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:5px 8px; border-radius:4px;">8. 靜安寺 · 31.2250, 121.4425</div>
+        <div style="font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:5px 8px; border-radius:4px;">9. 南京路步行街 · 31.2362, 121.4809</div>
+        <div style="font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:5px 8px; border-radius:4px;">10. 兴业太古汇 · 31.2334, 121.4547</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Tam Family China Adventure 2026 · Shanghai Attractions · Prepared by Jade 💚
+</footer>
+
+<script>
+  // Scroll-based active nav
+  const sections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.sticky-nav a[href^="#"]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (s.getBoundingClientRect().top <= 100) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+</script>
+</body>
+</html>

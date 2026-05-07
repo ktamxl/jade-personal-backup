@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shenzhen Attractions — Tam Family China 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sz-dark: #7b2d00; --sz-mid: #c04a0c; --sz-lt: #fdf0e8;
+    --gold: #c9a84c; --gold-lt: #f0d98a;
+    --ink: #1a1a2e; --soft: #f5f2ec; --white: #ffffff;
+    --radius: 14px; --shadow: 0 4px 24px rgba(0,0,0,.13);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: Georgia,'Times New Roman',serif; background: var(--sz-lt); color: var(--ink); line-height: 1.7; }
+
+  /* ── HERO ── */
+  .hero { background: linear-gradient(160deg,#3d1200 0%,#7b2d00 55%,#c04a0c 100%); color:#fff; text-align:center; padding:52px 24px 40px; }
+  .hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold-lt); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; padding:3px 14px; border-radius:20px; margin-bottom:14px; }
+  .hero h1 { font-size:clamp(1.6rem,5vw,2.6rem); font-weight:normal; letter-spacing:.02em; margin-bottom:6px; }
+  .hero-sub { font-size:.9rem; opacity:.8; }
+  .hero-stats { display:flex; justify-content:center; gap:28px; flex-wrap:wrap; margin-top:16px; }
+  .hero-stat { text-align:center; }
+  .hero-stat .val { font-size:1.4rem; font-weight:bold; color:var(--gold-lt); display:block; font-family:sans-serif; }
+  .hero-stat .lab { font-size:.65rem; opacity:.65; text-transform:uppercase; letter-spacing:.1em; font-family:sans-serif; }
+
+  /* ── STICKY NAV ── */
+  .sticky-nav { position:sticky; top:0; z-index:100; background:var(--sz-dark); display:flex; justify-content:center; overflow-x:auto; scrollbar-width:none; }
+  .sticky-nav::-webkit-scrollbar { display:none; }
+  .sticky-nav a { color:rgba(255,255,255,.72); text-decoration:none; font-family:sans-serif; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; padding:11px 14px; white-space:nowrap; border-bottom:2px solid transparent; transition:all .2s; }
+  .sticky-nav a:hover { color:var(--gold-lt); }
+  .sticky-nav a.active { color:var(--gold-lt); border-bottom-color:var(--gold-lt); }
+
+  /* ── SECTION ── */
+  .section { max-width:900px; margin:0 auto; padding:0 20px 40px; }
+
+  /* ── STOP CARD ── */
+  .stop-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:16px; overflow:hidden; display:grid; grid-template-columns:68px 1fr; transition:transform .2s; }
+  .stop-card:hover { transform:translateY(-2px); }
+  .stop-num { display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--sz-mid); color:#fff; font-family:sans-serif; padding:16px 8px; text-align:center; min-height:100px; }
+  .stop-num .n { font-size:1.4rem; font-weight:bold; line-height:1; }
+  .stop-num .label { font-size:.52rem; opacity:.7; text-transform:uppercase; letter-spacing:.05em; margin-top:4px; }
+  .stop-body { padding:18px 20px 16px 16px; }
+  .stop-body h3 { font-size:1.05rem; font-weight:normal; margin-bottom:4px; color:var(--ink); }
+  .stop-body .chinese { font-size:.78rem; color:var(--sz-mid); font-family:sans-serif; margin-bottom:8px; }
+  .stop-body p { font-size:.84rem; opacity:.72; margin-bottom:10px; }
+  .stop-tags { display:flex; flex-wrap:wrap; gap:5px; }
+  .stop-tag { display:inline-block; font-size:.6rem; padding:2px 8px; border-radius:20px; font-family:sans-serif; background:var(--sz-lt); color:var(--sz-dark); }
+  .stop-tag.highlight { background:var(--gold); color:var(--ink); }
+  .stop-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .stop-map-link { display:inline-flex; align-items:center; gap:5px; padding:5px 12px; background:#1dad19; color:#fff; border-radius:5px; font-size:.7rem; font-family:sans-serif; text-decoration:none; font-weight:bold; transition:all .2s; }
+  .stop-map-link:hover { opacity:.85; }
+  .stop-coords { font-family:sans-serif; font-size:.65rem; color:#888; }
+  .stop-note { display:inline-block; font-size:.62rem; font-family:sans-serif; background:#fff3e0; color:#a05000; border:1px solid #f5c070; border-radius:4px; padding:2px 8px; margin-top:8px; }
+
+  /* ── MAP SECTION ── */
+  .map-section { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; margin-bottom:20px; }
+  .map-header { padding:16px 20px; border-bottom:1px solid rgba(0,0,0,.06); }
+  .map-header h3 { font-size:.9rem; font-weight:normal; color:var(--ink); }
+  .map-embed { background:var(--sz-lt); display:flex; align-items:center; justify-content:center; padding:32px 24px; flex-direction:column; gap:10px; }
+  .map-placeholder { text-align:center; max-width:360px; }
+  .map-placeholder .icon { font-size:2.5rem; display:block; margin-bottom:8px; }
+  .map-placeholder p { font-family:sans-serif; font-size:.82rem; opacity:.7; line-height:1.6; }
+  .coords-block { background:var(--sz-lt); padding:16px 20px; border-top:1px solid rgba(0,0,0,.06); }
+  .coords-block p { font-family:sans-serif; font-size:.75rem; color:#555; margin-bottom:10px; }
+  .coords-list { display:flex; flex-direction:column; gap:4px; }
+  .coords-row { font-family:monospace; font-size:.68rem; color:#333; background:#fff; padding:4px 8px; border-radius:4px; }
+
+  /* ── FOOTER ── */
+  footer { text-align:center; padding:28px 24px; font-family:sans-serif; font-size:.72rem; opacity:.4; color:var(--ink); margin-top:16px; }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-badge">Shenzhen · 深圳</div>
+  <h1>🏙️ Shenzhen Attractions</h1>
+  <p class="hero-sub">13 curated highlights · Bay views, theme parks & Hakka heritage · Day 1–4</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="val">13</span><span class="lab">Attractions</span></div>
+    <div class="hero-stat"><span class="val">4</span><span class="lab">Days</span></div>
+    <div class="hero-stat"><span class="val">Nov 28–Dec 1</span><span class="lab">Dates</span></div>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="sticky-nav">
+  <a href="attractions.html">← Attractions</a>
+  <a href="#map">🗺️ Maps</a>
+  <a href="#stops">🚶 All Stops</a>
+</nav>
+
+<!-- ── ALL STOPS ── -->
+<div class="section" id="stops">
+
+  <!-- 1 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">1</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Shenzhen Talent Park</h3>
+      <div class="chinese">人才公園 · 南山区后海片区</div>
+      <p>Shenzhen's most scenic lake-side park, designed around a ring of water and a crescent moon bridge. Walk the lakeside boardwalk at sunset — the CBD skyline reflected on the water creates one of Shenzhen's most photographed scenes. Free entry, open 6 AM – 11 PM.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🌅 Sunset View</span>
+        <span class="stop-tag">🌿 Lakeside</span>
+        <span class="stop-tag">📸 Free</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=深圳人才公园&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.5070°N · 113.9390°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">2</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Shenzhen Bay Park</h3>
+      <div class="chinese">深圳灣公園 · 南山区望海路</div>
+      <p>A 13-kilometre seaside urban park along Shenzhen Bay. One of the city's most beloved green spaces — palm-lined promenades, ocean breezes, and views across the bay to Hong Kong. The sunset here is spectacular. Best accessed from Houhai section (South). Free entry.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🌊 Seaside</span>
+        <span class="stop-tag">🚴 13 km Promenade</span>
+        <span class="stop-tag">🌅 Free</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=深圳灣公園&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.5034°N · 113.9460°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">3</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Safari Park Shenzhen</h3>
+      <div class="chinese">野生動物園 · 南山区西丽湖东侧 4065号</div>
+      <p>China's first zoo with uncaged animals — visitors drive through savanna-style enclosures. Home to over 300 species including giant pandas, golden snub-nosed monkeys, and rare white tigers. 640,000 sqm of natural landscape. One of China's top-rated family attractions. Allow a full day.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🐼 Giant Pandas</span>
+        <span class="stop-tag">🚗 Drive-Through Safari</span>
+        <span class="stop-tag">👨‍👩‍👧‍👦 Family</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=深圳野生动物园&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.5839°N · 113.9309°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">4</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>OCT Harbour</h3>
+      <div class="chinese">歡樂港灣 · 南山区望海路2008号</div>
+      <p>Shenzhen's most beloved waterfront entertainment district. A lakeside paradise with boutique shops, international restaurants, a huge indoor theme park, and a musical fountain. The waterfront at night, lit up, is genuinely magical — ranked #5 family attraction in Guangdong. Free to walk around.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🎆 Waterfront</span>
+        <span class="stop-tag">🥃 Nightlife</span>
+        <span class="stop-tag">🛍️ Shopping</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=OCT歡樂港灣&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.4997°N · 113.9385°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">5</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Shenzhen Happy Valley</h3>
+      <div class="chinese">歡樂谷 · 南山区华侨城</div>
+      <p>The original Happy Valley theme park — the连锁 brand's flagship. Nine themed zones with over 100 rides including roller coasters, water rides, and live performances. 322,000 sqm of family fun. One of Guangdong's top theme parks. Allow a full day.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🎢 Roller Coasters</span>
+        <span class="stop-tag">💧 Water Rides</span>
+        <span class="stop-tag">👨‍👩‍👧‍👦 Family</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=深圳欢乐谷&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.5424°N · 113.9367°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">6</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Sea World</h3>
+      <div class="chinese">海上世界 · 南山区蛇口望海路1128号</div>
+      <p>The iconic seafront district in Shekou, built around the retired Minghua — a luxury cruise ship converted into a landmark. A bustling waterfront lined with bars, restaurants, and shops. Perfect for an evening stroll, dinner by the water, and people-watching in one of Shenzhen's most cosmopolitan corners.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🚢 Iconic Landmark</span>
+        <span class="stop-tag">🌊 Waterfront</span>
+        <span class="stop-tag">🥃 Evening Walk</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=海上世界&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.4830°N · 113.9120°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">7</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Gankeng Hakka Town</h3>
+      <div class="chinese">甘坑客家小镇 · 龙岗区甘坑社区甘李路18号</div>
+      <p>A beautifully preserved Hakka village turned cultural tourism destination. The town has retained its traditional Hakka architecture —古老的围龙屋, stone-paved lanes, and canals. Try authentic Hakka cuisine (盐焗鸡, 客家酿豆腐) and browse handcraft workshops. Ranked #5 spring outing destination in Guangdong.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🏘️ Hakka Heritage</span>
+        <span class="stop-tag">🍜 Hakka Cuisine</span>
+        <span class="stop-tag">📸 Traditional Architecture</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=甘坑客家小镇&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.6568°N · 114.1005°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">8</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>OCT Harbour Waterfront</h3>
+      <div class="chinese">歡樂港灣濱海區 · 同上</div>
+      <p>The waterfront extension of OCT Harbour — a stunning lakeside promenade with the Bay Glory Ferris Wheel as its centrepiece. The best evening photography spot in Nanshan: the ferris wheel reflected in the lake at dusk, with Hong Kong visible across the water. Free entry. Best at sunset.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🎡 Best Sunset Spot</span>
+        <span class="stop-tag">📸 Ferris Wheel</span>
+        <span class="stop-tag">🌅 Free</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=OCT灣區之光摩天輪&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.4997°N · 113.9385°E <span style="font-size:.6rem;color:#888;">(same as OCT Harbour)</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">9</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Shenzhen Bay Cultural Plaza</h3>
+      <div class="chinese">深圳灣文化廣場 · 南山区科苑南路2516號</div>
+      <p>Shenzhen's newest landmark — eight giant stone-like pavilions designed by MAD Architects (Ma Yansong) that resemble oversized AirPods emerging from the ground. Opened late 2025. A major waterfront cultural space for design and science exhibitions. Metro Line 13 to Talent Park Station, Exit B1.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🏛️ New Landmark</span>
+        <span class="stop-tag">🎨 Design Museum</span>
+        <span class="stop-tag">📸 Architecture</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=深圳灣文化廣場&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.5060°N · 113.9380°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">10</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Shenzhen Science Life Hall</h3>
+      <div class="chinese">深圳科学生活馆 · 深圳灣文化廣場內</div>
+      <p>Located within the Shenzhen Bay Cultural Plaza complex. An interactive science education centre exploring innovation and future living concepts. The space hosts rotating exhibitions on technology, design, and everyday science. Check hours before visiting — currently under renovation for some zones.</p>
+      <div class="stop-tags">
+        <span class="stop-tag">🔬 Science</span>
+        <span class="stop-tag">👨‍👩‍👧‍👦 Family</span>
+        <span class="stop-tag">🎓 Interactive</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=深圳科学生活馆&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.5060°N · 113.9380°E <span style="font-size:.6rem;color:#888;">(same plaza)</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">11</span><span class="label"></span></div>
+    <div class="stop-body">
+      <h3>Shenzhen Bay MixC</h3>
+      <div class="chinese">深圳灣萬象城 · 南山区科苑南路2888号</div>
+      <p>Shenzhen's most prestigious bay-front luxury shopping centre. High-end international brands, a curated food hall, and waterfront views in one space. Connected to Houhai Metro Station (Lines 9/11). The exterior at night, with the tower lit up, makes for great photos from the boardwalk.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">🛍️ Luxury Shopping</span>
+        <span class="stop-tag">🍽️ Dining</span>
+        <span class="stop-tag">🌅 Bay Views</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=深圳灣萬象城&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.5182°N · 113.9368°E</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">12</span><span class="label">END</span></div>
+    <div class="stop-body">
+      <h3>Shenzhen Library North Hall</h3>
+      <div class="chinese">深圳圖書館北館 · 龍華區騰龍路30號</div>
+      <p>Shenzhen's newest major cultural institution — a stunning white building in Longhua District designed to hold 8 million books with 2,500 reading seats. The counterpart to the main library in Futian. One of the largest public library buildings in Asia. Air-conditioned, peaceful, and free. Great for a quiet afternoon or an architectural visit.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">📚 Architecture</span>
+        <span class="stop-tag">📖 Free</span>
+        <span class="stop-tag">☕ Quiet Afternoon</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=深圳圖書館北館&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.6638°N · 114.0576°E</span>
+      </div>
+    </div>
+  </div>
+
+<!-- ── MAP OVERVIEW ── -->
+  <!-- 13 -->
+  <div class="stop-card">
+    <div class="stop-num"><span class="n">13</span><span class="label">⭐ TOP</span></div>
+    <div class="stop-body">
+      <div class="stop-note" class="stop-note">⭐ Ken's Top Pick</div>
+      <h3>Shenzhen Science &amp; Technology Museum</h3>
+      <div class="chinese">深圳科學技術館 · 光明區光輝大道8號</div>
+      <p>Shenzhen's flagship science museum — one of the largest in southern China with 35,000 sqm of exhibition space. Eight themed zones covering robotics, space exploration, biotechnology, virtual reality, and hands-on experiments. Perfect for curious minds of all ages. Connected to Guangming Metro Station (Line 6) via sky bridge.</p>
+      <div class="stop-tags">
+        <span class="stop-tag highlight">⭐ Ken's Top Pick</span>
+        <span class="stop-tag">🔬 Science</span>
+        <span class="stop-tag">👨‍👩‍👧‍👦 Family</span>
+        <span class="stop-tag">🤖 Robotics / VR</span>
+      </div>
+      <div class="stop-actions">
+        <a class="stop-map-link" href="https://www.amap.com/search?query=深圳科学技术馆&city=440300" target="_blank" rel="noopener">🗺️ Amap →</a>
+        <span class="stop-coords">📍 22.7807°N · 113.9267°E (approx., Guangming District)</span>
+      </div>
+    </div>
+  </div>
+
+<div class="section" id="map">
+  <div class="map-section">
+    <div class="map-header">
+      <h3>🗺️ Navigate Shenzhen — Open All Pins in Amap</h3>
+    </div>
+    <div class="map-embed">
+      <div class="map-placeholder">
+        <span class="icon">🏙️</span>
+        <p><strong>Open each stop in 高德地图 (Amap)</strong><br>Tap any green button above to search it directly in Amap.<br>All stops are in Nanshan District unless noted.</p>
+      </div>
+    </div>
+    <div class="coords-block">
+      <p><strong>📍 All 12 Coordinates (copy into Amap):</strong></p>
+      <div class="coords-list">
+        <div class="coords-row">1. 深圳人才公園 · 22.5070, 113.9390</div>
+        <div class="coords-row">2. 深圳灣公園 · 22.5034, 113.9460</div>
+        <div class="coords-row">3. 深圳野生動物園 · 22.5839, 113.9309</div>
+        <div class="coords-row">4. 歡樂港灣 · 22.4997, 113.9385</div>
+        <div class="coords-row">5. 歡樂谷 · 22.5424, 113.9367</div>
+        <div class="coords-row">6. 海上世界 · 22.4830, 113.9120</div>
+        <div class="coords-row">7. 甘坑客家小镇 · 22.6568, 114.1005</div>
+        <div class="coords-row">8. 灣區之光摩天輪 · 22.4997, 113.9385</div>
+        <div class="coords-row">9. 深圳灣文化廣場 · 22.5060, 113.9380</div>
+        <div class="coords-row">10. 深圳科學生活館 · 22.5060, 113.9380</div>
+        <div class="coords-row">11. 深圳灣萬象城 · 22.5182, 113.9368</div>
+        <div class="coords-row">12. 深圳圖書館北館 · 22.6638, 114.0576</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Tam Family China Adventure 2026 · Shenzhen Attractions · Prepared by Jade 💚
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.sticky-nav a[href^="#"]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (s.getBoundingClientRect().top <= 100) current = s.getAttribute('id'); });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+</script>
+</body>
+</html>

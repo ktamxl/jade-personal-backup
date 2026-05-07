@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurants — Tam Family China Adventure 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a2e; --soft: #f5f2ec; --white: #ffffff;
+    --gold: #c9a84c; --gold-lt: #f0d98a;
+    --sh-dark: #0d3d4f; --sh-mid: #1a6880; --sh-lt: #e8f4f8;
+    --sz-dark: #7b2d00; --sz-mid: #c04a0c; --sz-lt: #fdf0e8;
+    --hk-dark: #3b1f5e; --hk-mid: #6b3fa0; --hk-lt: #f3eeff;
+    --radius: 16px; --shadow: 0 6px 24px rgba(0,0,0,.13);
+    --radius-sm: 10px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: var(--soft); color: var(--ink); line-height: 1.7; }
+
+  .hero {
+    background: linear-gradient(160deg,#1a0d2e 0%,#2d1b52 50%,#3b1f5e 100%);
+    color: #fff; text-align: center;
+    padding: 80px 24px 64px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,.06)"/></svg>') repeat;
+    background-size: 28px 28px;
+  }
+  .hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold-lt); font-size:.75rem; letter-spacing:.18em; text-transform:uppercase; padding:5px 20px; border-radius:20px; margin-bottom:20px; }
+  .hero h1 { font-size:clamp(2rem,6vw,3.6rem); font-weight:normal; letter-spacing:.02em; margin-bottom:12px; line-height:1.2; }
+  .hero h1 em { color:var(--gold-lt); font-style:normal; }
+  .hero-sub { font-size:1.05rem; opacity:.75; margin-bottom:10px; max-width:600px; margin-left:auto; margin-right:auto; }
+  .hero-tagline { font-size:.82rem; opacity:.55; font-family:sans-serif; letter-spacing:.06em; text-transform:uppercase; }
+
+  .sticky-nav { position:sticky; top:0; z-index:100; background:var(--ink); display:flex; justify-content:center; overflow-x:auto; scrollbar-width:none; }
+  .sticky-nav::-webkit-scrollbar { display:none; }
+  .sticky-nav a { color:rgba(255,255,255,.7); text-decoration:none; font-family:sans-serif; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; padding:13px 18px; white-space:nowrap; border-bottom:2px solid transparent; transition:all .2s; }
+  .sticky-nav a:hover { color:var(--gold); }
+
+  .city-banner { padding:56px 24px 36px; color:#fff; }
+  .city-banner.sh { background:linear-gradient(135deg,var(--sh-dark),var(--sh-mid)); }
+  .city-banner.sz { background:linear-gradient(135deg,var(--sz-dark),var(--sz-mid)); }
+  .city-banner.hk { background:linear-gradient(135deg,var(--hk-dark),var(--hk-mid)); }
+  .city-banner-inner { max-width:900px; margin:0 auto; }
+  .city-banner .eyebrow { font-family:sans-serif; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; opacity:.7; margin-bottom:8px; }
+  .city-banner h2 { font-size:clamp(2rem,6vw,3rem); font-weight:normal; margin-bottom:8px; }
+  .city-banner .dates-tag { font-family:sans-serif; font-size:.88rem; opacity:.85; margin-bottom:10px; }
+  .city-banner .city-desc { font-size:.88rem; opacity:.8; max-width:600px; }
+
+  /* Featured HK */
+  .featured-section { padding:40px 24px 0; max-width:960px; margin:0 auto; }
+  .featured-card {
+    background: linear-gradient(135deg,#1a0d2e, #3b1f5e);
+    border-radius:20px; padding:48px 40px; color:#fff;
+    display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
+    box-shadow: 0 12px 48px rgba(59,31,94,.35);
+    margin-bottom:8px;
+  }
+  .featured-card .feat-left h2 { font-size:clamp(1.5rem,3vw,2.2rem); font-weight:normal; color:var(--gold-lt); margin-bottom:6px; line-height:1.3; }
+  .featured-card .feat-left .subtitle { font-size:.85rem; opacity:.7; font-style:italic; margin-bottom:16px; }
+  .featured-card .feat-left p { font-size:.88rem; opacity:.82; line-height:1.85; margin-bottom:16px; }
+  .featured-card .feat-right { position:relative; }
+  .featured-card .feat-right img { width:100%; height:320px; object-fit:cover; border-radius:14px; box-shadow:0 8px 32px rgba(0,0,0,.4); }
+  .featured-badge { position:absolute; top:14px; right:14px; background:var(--gold); color:var(--ink); font-size:.65rem; font-family:sans-serif; font-weight:bold; letter-spacing:.08em; padding:4px 10px; border-radius:20px; }
+
+  .tag { display:inline-block; font-size:.65rem; padding:3px 9px; border-radius:20px; font-family:sans-serif; font-weight:bold; vertical-align:middle; }
+  .tag.award { background:#fce4ec; color:#880e4f; }
+  .tag.star { background:#fff3e0; color:#e65100; }
+  .tag.mich { background:#e8f5e9; color:#1b5e20; }
+  .tag.pick { background:#e3f2fd; color:#0d47a1; }
+
+  .dish-list { list-style:none; margin-top:12px; }
+  .dish-list li { display:flex; gap:8px; padding:6px 0; border-top:1px solid rgba(255,255,255,.1); font-size:.82rem; }
+  .dish-list li:first-child { border:none; }
+  .dish-icon { font-size:1rem; flex-shrink:0; margin-top:2px; }
+  .dish-name { color:#f0d98a; font-weight:bold; }
+  .dish-note { opacity:.72; font-size:.78rem; }
+
+  .resto-meta { display:flex; flex-wrap:wrap; gap:10px; font-size:.77rem; font-family:sans-serif; background:rgba(255,255,255,.1); border-radius:8px; padding:10px 14px; color:rgba(255,255,255,.78); margin-top:16px; }
+  .resto-meta span { display:flex; align-items:center; gap:4px; }
+
+  /* Cards */
+  .cards-section { padding:32px 24px 0; max-width:960px; margin:0 auto; }
+  .resto-card { background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:28px; overflow:hidden; display:grid; grid-template-columns:1fr; }
+  .resto-card.reverse { direction:ltr; }
+  .resto-img { width:100%; height:320px; object-fit:cover; display:block; flex-shrink:0; }
+  .resto-body { padding:28px 30px; }
+  .resto-eyebrow { font-family:sans-serif; font-size:.68rem; letter-spacing:.15em; text-transform:uppercase; margin-bottom:6px; }
+  .resto-body h3 { font-size:1.3rem; font-weight:normal; margin-bottom:4px; color:var(--ink); }
+  .resto-sub { font-size:.82rem; opacity:.6; margin-bottom:14px; font-style:italic; }
+  .resto-desc { font-size:.87rem; line-height:1.8; margin-bottom:14px; color:#333; }
+  .tag-row { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+  .sh .resto-eyebrow { color:var(--sh-mid); }
+  .sz .resto-eyebrow { color:var(--sz-mid); }
+  .hk .resto-eyebrow { color:var(--hk-mid); }
+
+  /* Tips */
+  .tips-section { padding:48px 24px 64px; }
+  .tips-section h2 { text-align:center; font-weight:normal; font-size:1.7rem; margin-bottom:32px; color:var(--ink); }
+  .tips-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; max-width:900px; margin:0 auto; }
+  .tip-card { background:#fff; border-radius:var(--radius); padding:22px; box-shadow:0 2px 14px rgba(0,0,0,.07); }
+  .tip-icon { font-size:1.6rem; margin-bottom:10px; }
+  .tip-title { font-family:sans-serif; font-size:.85rem; font-weight:bold; margin-bottom:6px; }
+  .tip-body { font-size:.82rem; color:#555; line-height:1.6; }
+
+  footer { background:var(--ink); color:rgba(255,255,255,.45); text-align:center; padding:32px 24px; font-family:sans-serif; font-size:.8rem; }
+  footer .gold { color:var(--gold); }
+
+  @media (max-width:768px) {
+    .resto-card, .resto-card.reverse { grid-template-columns:1fr; }
+    .resto-card.reverse .resto-img { order:0; }
+    .resto-img { width:100%; height:240px; min-height:unset; }
+    .featured-card { grid-template-columns:1fr; }
+  }
+  @media print { .sticky-nav { display:none; } }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Tam Family · November – December 2026</div>
+  <h1>Where We <em>Eat</em> 🥢</h1>
+  <p class="hero-sub">A curated guide to the best tables on the trip — world-ranked fine dining, legendary neighbourhood institutions, and everything in between.</p>
+  <div class="hero-tagline">Shanghai · Shenzhen · Hong Kong</div>
+</section>
+
+<nav class="sticky-nav">
+  <a href="#hk">Hong Kong</a>
+  <a href="#shanghai">Shanghai</a>
+  <a href="#shenzhen">Shenzhen</a>
+  <a href="#tips">Tips</a>
+  <a href="index.html">← Trip Home</a>
+</nav>
+
+<!-- HONG KONG -->
+<section class="city-banner hk" id="hk">
+  <div class="city-banner-inner">
+    <div class="eyebrow">City 03 · Hong Kong · December 2–5, 2026</div>
+    <h2>Hong Kong</h2>
+    <div class="dates-tag">🌃 One of the world's great dining cities</div>
+    <div class="city-desc">A place where Cantonese cooking reaches its absolute pinnacle — and where a new generation of chefs is quietly rewriting the rulebook.</div>
+  </div>
+</section>
+
+<!-- THE CHAIRMAN — FEATURED -->
+<div class="featured-section">
+  <div class="resto-card" style="background:linear-gradient(135deg,#1a0d2e,#3b1f5e);">
+    <img class="resto-img" src="imgs/the-chairman-new.png" alt="The Chairman restaurant" style="width:100%;height:420px;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;" onerror="this.style.display='none'">
+    <div class="resto-body" style="color:#fff;">
+      <div class="eyebrow" style="font-family:sans-serif; font-size:.65rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-lt); margin-bottom:10px;">★ Asia's No.1 Restaurant · 2026</div>
+      <h2 style="color:#f0d98a; font-size:2rem; font-weight:normal; margin-bottom:6px;">大班樓 · The Chairman</h2>
+      <div class="resto-sub" style="color:rgba(255,255,255,.7); font-size:.85rem; margin-bottom:16px;">中環威靈頓街198號 The Wellington · ⭐ 1 Michelin Star</div>
+      <div class="tag-row">
+        <span class="tag award">🏆 Asia's 50 Best — No. 1, 2026</span>
+        <span class="tag star">⭐ Michelin 1 Star</span>
+        <span class="tag pick">🌿 No shark's fin, sea cucumber or bird's nest — eco-friendly by philosophy</span>
+      </div>
+      <p style="font-size:.88rem; opacity:.82; line-height:1.85; margin-bottom:12px;">Cantonese cuisine has a history of two thousand years. Today it has evolved to become the most popular and widely influential cuisine among the "eight culinary classical styles" of China. The reason for its success boils down to one keyword: <strong style="color:#f0d98a;">"freshness."</strong></p>
+      <p style="font-size:.88rem; opacity:.82; line-height:1.85; margin-bottom:12px;">The Chairman's aspiration is to continue this legacy. As much as possible, they use locally sourced ingredients, products from local condiment stores, and seafood from local fishermen — sent to the restaurant <strong>every morning at 6 AM from Aberdeen Fish Market</strong>. Their cooking style is fundamentally built on tradition, bringing out the original flavours of the ingredients rather than showing off. <em>"The most simple food demands the highest level of culinary skills."</em></p>
+      <p style="font-size:.88rem; opacity:.82; line-height:1.85; margin-bottom:14px;">A few examples: their razor clams are steamed with <strong>aged lemon aged over 10 years</strong>. Their smoked baby pigeon is prepared traditionally with <strong>20-day-old pigeons</strong> until the bones are tender. Their chilli jam is made with <strong>slow-cooked oxtail</strong>. Even the beancurd sheets come from the famous local store <strong>Shu Kee</strong>. The Chairman soy sauce chicken uses herbs <em>more expensive than the chicken itself</em>.</p>
+      <ul class="dish-list">
+        <li><span class="dish-icon">🦀</span><div><span class="dish-name">Steamed Fresh Flowery Crab</span><br><span class="dish-note">The dish that made the restaurant famous. Hand-picked daily from Aberdeen Fish Market at 6AM. Worth a trip to Hong Kong on its own.</span></div></li>
+        <li><span class="dish-icon">🍗</span><div><span class="dish-name">The Chairman Soy Sauce Chicken</span><br><span class="dish-note">House signature. Herbs used are more expensive than the chicken itself. A quiet masterpiece.</span></div></li>
+        <li><span class="dish-icon">🐦</span><div><span class="dish-name">Smoked Baby Pigeon with Longjing Tea</span><br><span class="dish-note">Prepared the traditional way with 20-day-old pigeons until the bones are tender.</span></div></li>
+        <li><span class="dish-icon">🐚</span><div><span class="dish-name">Razor Clams Steamed with Aged Lemon</span><br><span class="dish-note">Lemon aged over 10 years. Fragrant, briny, extraordinary.</span></div></li>
+      </ul>
+      <div class="resto-meta">
+        <span>📍 The Wellington, 198 Wellington St, Central, Hong Kong</span>
+        <span>🕐 Lunch 12–3PM · Dinner 6–10PM (Closed Sunday)</span>
+        <span>🌐 thechairman.hk — book 6–8 weeks ahead</span>
+        <span>👔 Smart casual dress code</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SHANGHAI -->
+<section class="city-banner sh" id="shanghai">
+  <div class="city-banner-inner">
+    <div class="eyebrow">City 01 · Shanghai 上海 · November 23–28, 2026</div>
+    <h2>Shanghai</h2>
+    <div class="dates-tag">🏙️ Michelin-starred rooftops, legendary neighbourhood tables</div>
+    <div class="city-desc">From Asia's 100 Best Bars to 30-year-old xiaolongbao institutions — Shanghai rewards those who seek.</div>
+  </div>
+</section>
+
+<div class="cards-section">
+
+  <!-- ROOF Bar -->
+  <div class="resto-card">
+    <img class="resto-img" src="imgs/roof-bar-shanghai-edition-new.png" alt="ROOF Bar The Shanghai EDITION open-air terrace" style="width:100%;height:380px;object-fit:cover;" onerror="this.style.display='none'">
+    <img class="resto-img" src="imgs/shanghai-edition-roof-bar-night-view.jpg" alt="ROOF Bar The Shanghai EDITION night view" style="width:100%;height:380px;object-fit:cover;" onerror="this.style.display='none'">
+    <div class="resto-body sh">
+      <div class="resto-eyebrow">🍸 Rooftop Bar · The Shanghai EDITION · 29th Floor</div>
+      <h3>ROOF Bar</h3>
+      <div class="resto-sub">199 Nanjing Road East · Open 5:30PM–1AM nightly (Fri/Sat until 2AM)</div>
+      <div class="tag-row">
+        <span class="tag award">🏆 Asia's 100 Best Bars 2026</span>
+        <span class="tag pick">📍 29th Floor · The Shanghai EDITION</span>
+      </div>
+      <p class="resto-desc">Located on the 29th floor and surrounded by a stunning ivy-covered trellis, ROOF is an open-air lounge area offering guests a comfortable, intimate setting for casual drinks. Featuring one of the most spectacular panoramic views of Pudong from the Bund, the bar serves a range of classic and innovative libations prepared by EDITION's expert mixologist.</p>
+      <p class="resto-desc">Arrive just before sunset to secure a window table — the moment the Pudong skyline ignites is one you'll remember. Perfect for arriving-night drinks, celebratory toasts, or a nightcap after Nanjing Road.</p>
+      <div class="resto-meta" style="background:#f8f6f0; color:#555;">
+        <span>📍 The Shanghai EDITION, 199 Nanjing Road East, 29F</span>
+        <span>🕐 5:30PM–1AM nightly (Fri/Sat until 2AM)</span>
+        <span>🎫 No reservations — first come, first served</span>
+        <span>💰 Cocktails ~¥120–180</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Xin Rong Ji -->
+  <div class="resto-card">
+    <img class="resto-img" src="imgs/xin-rong-ji-new.jpg" alt="Xin Rong Ji restaurant" style="width:100%;height:380px;object-fit:cover;" onerror="this.style.display='none'">
+    <div class="resto-body sh">
+      <div class="resto-eyebrow">⭐ Michelin Star · Est. 1995 · Jade's Pick</div>
+      <h3>新榮記 · Xin Rong Ji</h3>
+      <div class="resto-sub">688 Nanjing West Road, Jing'an · ~5 min from The Shanghai EDITION</div>
+      <div class="tag-row">
+        <span class="tag star">🏆 No. 1 Chinese Restaurant Brand in the World</span>
+        <span class="tag mich">⭐ MICHELIN 1 Star · World's 50 Best Discovery</span>
+        <span class="tag pick">🚶 5 min walk from EDITION</span>
+      </div>
+      <p class="resto-desc" style="font-size:.87rem;line-height:1.8;margin-bottom:12px;"><em style="font-size:.85rem;color:var(--sh-mid);">1995 年 · The launch of Xin Rong Ji</em></p>
+      <p class="resto-desc">Xin Rong Ji is a name that embodies the meaning of <strong>"Flourishing Prosperity."</strong> On October 1, 1995, the first Xin Rong Ji restaurant opened in <strong>Taizhou</strong>, the birthplace of the Tiantai School of Buddhism. Rooted in the bounty of the East China Sea, Xin Rong Ji has gradually expanded to Hangzhou, Ningbo, Chengdu, Xi'an, Wuhan, Shenzhen, Suzhou, Jiangxi, Hainan — and internationally to <strong>Hong Kong</strong> and <strong>Tokyo</strong>.</p>
+      <p class="resto-desc">Xin Rong Ji adheres to the culinary philosophy of <strong>"First Seek the Authentic, Then Achieve the Sublime."</strong> Guided by the <strong>Three True Fires</strong> — genuine ingredients, authentic flavours, and sincere hospitality — they are devoted to revealing the inherent essence of every ingredient.</p>
+      <ul class="dish-list" style="color:#333;">
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🐟</span><div><span class="dish-name" style="color:var(--ink);">Braised Yellow Croaker 手燒黃魚</span><br><span class="dish-note">The dish that made the restaurant famous. Wild yellow croaker with handmade rice cakes in a rich, nostalgic Taizhou sauce. Order without hesitation.</span></div></li>
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🥟</span><div><span class="dish-name" style="color:var(--ink);">Pork &amp; Crab Roe Soup Dumplings</span><br><span class="dish-note">Michelin inspectors' favourite. Delicate xiao long bao with rich crab roe filling.</span></div></li>
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🦆</span><div><span class="dish-name" style="color:var(--ink);">Baked Duck Foie Gras Buns</span><br><span class="dish-note">A Xin Rong Ji original — luxury meets tradition. Truffle-scented, extraordinary.</span></div></li>
+      </ul>
+      <div class="resto-meta" style="background:#f8f6f0; color:#555;">
+        <span>📍 688 Nanjing West Road, Jing'an (5 min walk from The Shanghai EDITION)</span>
+        <span>🕐 Lunch 11:30AM–2PM · Dinner 5:30–10PM</span>
+        <span>🌐 xinrongji.com · Book via Dianping or phone</span>
+        <span>💰 ¥500–1,000+/person · Premium but worth every yuan</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Qiao Ai Lai Lai -->
+  <div class="resto-card">
+    <img class="resto-img" src="imgs/qiao-ai-lai-lai-new.png" alt="Qiao Ai Lai Lai xiaolongbao" style="width:100%;height:380px;object-fit:cover;" onerror="this.style.display='none'">
+    <div class="resto-body sh">
+      <div class="resto-eyebrow">🥟 Bib Gourmand · Est. ~2005 · Near The Bund</div>
+      <h3>橋愛來來小籠 · Qiao Ai Lai Lai</h3>
+      <div class="resto-sub">336 Yunnan Road, Huangpu · Open 8AM–2PM &amp; 3–8PM · Closed Monday</div>
+      <div class="tag-row">
+        <span class="tag mich">⭐ MICHELIN Bib Gourmand</span>
+        <span class="tag star">🌟 Asia's 50 Best Must-Visit</span>
+        <span class="tag pick">💰 ~¥60–100/person (exceptional value!)</span>
+      </div>
+      <p class="resto-desc"><strong>Bib Gourmand: good quality, good value cooking.</strong></p>
+      <p class="resto-desc">This simple little shop tucked away in a bustling alley has been packed with hungry diners ever since it opened its doors <strong>20 years ago</strong>. The chefs are always busy in the kitchen making xiao long bao, the crab roe variety being the most popular. Brace yourself for an even bigger crowd in hairy crab season, when wontons, spring rolls and soups are generously loaded with crabmeat and roe. The classic soupy pork buns are another must-try.</p>
+      <ul class="dish-list" style="color:#333;">
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🥟</span><div><span class="dish-name" style="color:var(--ink);">Crab Roe Xiaolongbao 蟹粉小籠包</span><br><span class="dish-note">The crown jewel. Rich crab roe filling, gossamer wrapper. Peak season: November. Order 1–2 portions per person.</span></div></li>
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🥟</span><div><span class="dish-name" style="color:var(--ink);">Classic Soupy Pork Buns 鮮肉小籠包</span><br><span class="dish-note">The benchmark. Perfectly seasoned pork, pristine broth inside.</span></div></li>
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🥟</span><div><span class="dish-name" style="color:var(--ink);">Hairy Crab Season Specials</span><br><span class="dish-note">Wontons, spring rolls and soups loaded with crabmeat & roe. November is peak — expect the longest queues of the year.</span></div></li>
+      </ul>
+      <div class="resto-meta" style="background:#f8f6f0; color:#555;">
+        <span>📍 336 Yunnan Road, Huangpu (near The Bund)</span>
+        <span>🕐 8AM–2PM · 3–8PM · Closed Monday</span>
+        <span>🎫 No reservations — arrive before 1PM on weekends</span>
+        <span>⚠️ Expect 20–45 min queue · Peak hairy crab season: November</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Xintiandi -->
+  <div class="resto-card">
+    <img class="resto-img" src="imgs/xintiandi-new.png" alt="Xintiandi Shanghai Shikumen heritage architecture" style="width:100%;height:380px;object-fit:cover;" onerror="this.style.display='none'">
+    <div class="resto-body sh">
+      <div class="resto-eyebrow">🍽️ Dining District · Multiple Cuisines · Evening</div>
+      <h3>新天地 · Xintiandi</h3>
+      <div class="resto-sub">Huangpu District · Open daily until late</div>
+      <div class="tag-row">
+        <span class="tag pick">🏛️ Shikumen Heritage Architecture</span>
+        <span class="tag star">🌃 Vibrant Nightlife & Dining Combined</span>
+      </div>
+      <p class="resto-desc">Shanghai's most atmospheric dining neighbourhood — 1920s Shikumen townhouses converted into excellent restaurants, bars and cafés. The setting is genuinely beautiful: lantern-lit alleys, restored stone archways, warm lighting. Perfect for a family group dinner when everyone wants something different.</p>
+      <p class="resto-desc"><strong>Recommendations within Xintiandi:</strong> Sir Stanley's for elevated Shanghainese, Kommune for vibrant social dining, Azul for Spanish tapas with a view. Or wander freely — every doorway is worth exploring.</p>
+      <div class="resto-meta" style="background:#f8f6f0; color:#555;">
+        <span>📍 Xintiandi, Huangpu (Metro: South Huangpi Road, Lines 1/10)</span>
+        <span>🕐 Most places: 11AM–11PM, bars until late</span>
+        <span>🚇 ~5 min from ROOF Bar by DiDi</span>
+        <span>💰 Wide range — ¥80–500+/person</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SHENZHEN -->
+<section class="city-banner sz" id="shenzhen">
+  <div class="city-banner-inner">
+    <div class="eyebrow">City 02 · Shenzhen 深圳 · November 28 – December 2, 2026</div>
+    <h2>Shenzhen</h2>
+    <div class="dates-tag">🌆 Modern, ambitious, and full of pleasant surprises</div>
+    <div class="city-desc">Sea World Shekou is the culinary heart of Shenzhen's best eating — waterfront dining, excellent international restaurants, and some of the best value seafood in China.</div>
+  </div>
+</section>
+
+<div class="cards-section" style="padding-bottom:48px;">
+
+<!-- Tao Tao Ju -->
+  <div class="resto-card">
+    <img class="resto-img" src="imgs/tao-tao-ju-new.png" alt="Tao Tao Ju dim sum restaurant Guangzhou" style="width:100%;height:380px;object-fit:cover;" onerror="this.style.display='none'">
+    <div class="resto-body sz">
+      <div class="resto-eyebrow">🥟 Guangzhou · Est. 1880 · Iconic Cantonese Institution</div>
+      <h3>陶陶居酒家 · Tao Tao Ju</h3>
+      <div class="resto-sub">Guangzhou · Private Room Dining · Open 6:30PM – Midnight</div>
+      <div class="tag-row">
+        <span class="tag star">🏆 One of Guangzhou's Oldest & Most Esteemed Cantonese Restaurants</span>
+        <span class="tag pick">🥟 200+ Dim Sum Varieties</span>
+        <span class="tag">🌿 Lingnan Heritage · Rose Gold &amp; Olive Green Decor</span>
+      </div>
+      <p class="resto-desc">Tao Tao Ju is one of the most authentic dim sum restaurants in Guangzhou — ranked among the very best, if not <em>the</em> best. Named <strong>"House of Happiness,"</strong> this century-old establishment has been delighting visitors since <strong>1880</strong> with a calm and rich dining experience steeped in tradition and flavour.</p>
+      <p class="resto-desc">For tourists, this authentic evening tea restaurant gives you the option to try every facet of Cantonese culinary culture. With over <strong>200 varieties of dim sum</strong>, Tao Tao Ju ensures you can try an enormous range — we recommend coming with a large group so you can order more dishes.</p>
+      <p class="resto-desc">You will be seated in a <strong>private dining room</strong> — decorated in rose gold and olive green, paying homage to Lingnan architectural heritage. Helmed by a seasoned chef from Hong Kong with over three decades of expertise, the dim sum is impeccably crafted.</p>
+      <p class="resto-desc">Operating from <strong>6:30PM until midnight</strong>, it is perfect for an evening meal after exploring the city.</p>
+      <ul class="dish-list" style="color:#333;">
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🥮</span><div><span class="dish-name" style="color:var(--ink);">Nai Huang Bao 奶黃包</span><br><span class="dish-note">The signature dish. Exquisitely blending milk and egg yolks — rich, silky, extraordinary. A Tao Tao Ju trademark.</span></div></li>
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🥟</span><div><span class="dish-name" style="color:var(--ink);">Traditional Dim Sum Selection</span><br><span class="dish-note">Over 200 varieties to choose from. Come with a large group and order everything you can.</span></div></li>
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🍵</span><div><span class="dish-name" style="color:var(--ink);">Traditional Afternoon Tea</span><br><span class="dish-note">Sweet treats and traditional tea service — the Cantonese way.</span></div></li>
+      </ul>
+      <div class="resto-meta" style="background:#f8f6f0; color:#555;">
+        <span>📍 Guangzhou, China (Taxi/DiDi from city centre)</span>
+        <span>🕐 6:30PM – Midnight daily</span>
+        <span>🚗 Parking available · Air conditioning · Terrace</span>
+        <span>💰 ¥150–400/person · Private room dining experience</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sea World Shekou -->
+  <div class="resto-card reverse">
+    <img class="resto-img" src="imgs/sea-world-shenzhen-minghua-ship-waterfront-night.jpg" alt="Sea World Shekou waterfront at night" onerror="this.style.display='none'">
+    <div class="resto-body sz">
+      <div class="resto-eyebrow">🌊 Waterfront Dining · Shekou · Evening Hotspot</div>
+      <h3>海上世界 · Sea World Shekou</h3>
+      <div class="resto-sub">Sea World Plaza, Shekou · Open daily until late</div>
+      <div class="tag-row">
+        <span class="tag pick">🚢 Minghua Ship Landmark · Open-air promenade</span>
+        <span class="tag star">🌃 One of Shekou's Best Evening Areas</span>
+      </div>
+      <p class="resto-desc">Sea World Shekou is the social heart of Shenzhen — a vast waterfront complex anchored by the Minghua Ship, permanently moored and converted into a dining and entertainment destination. The plaza comes alive at night with hundreds of restaurants and bars spilling onto the waterfront promenade. A wonderful place for a relaxed family dinner with bay views.</p>
+      <p class="resto-desc"><strong>Highlights:</strong> Pizzeria Alla Torre (authentic wood-fired Italian with a stunning terrace), premium Chinese seafood (point-and-choose live tanks), Korean BBQ, Japanese izakaya, and the lively deck bars around the Minghua Ship.</p>
+      <ul class="dish-list" style="color:#333;">
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🍕</span><div><span class="dish-name" style="color:var(--ink);">Pizzeria Alla Torre — Wood-fired Pizza</span><br><span class="dish-note">Widely considered one of the best pizzas in Guangdong. Authentic Italian, waterfront terrace. Outstanding pasta too.</span></div></li>
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🦐</span><div><span class="dish-name" style="color:var(--ink);">Live Seafood — any Chinese restaurant</span><br><span class="dish-note">Shekou is known for live seafood markets. Point, choose, have it cooked to order. Exceptional quality for the price.</span></div></li>
+        <li style="border-color:rgba(0,0,0,.07);"><span class="dish-icon">🍺</span><div><span class="dish-name" style="color:var(--ink);">Minghua Deck — Evening Drinks</span><br><span class="dish-note">The outdoor deck around the Minghua Ship has multiple affordable bars and a genuinely lively atmosphere.</span></div></li>
+      </ul>
+      <div class="resto-meta" style="background:#f8f6f0; color:#555;">
+        <span>📍 Sea World Plaza, Shekou, Nanshan District</span>
+        <span>🚇 Metro Line 2 to Sea World Station (Exit A)</span>
+        <span>🕐 Restaurants: 11AM–11PM · Bars: until 1–2AM</span>
+        <span>💰 ¥100–400/person depending on venue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OCT Harbour -->
+  <div class="resto-card">
+    <img class="resto-img" src="imgs/andaz-shenzhen-bay-luxury-hotel-exterior-skyline.jpg" alt="OCT Harbour Shenzhen" onerror="this.style.display='none'">
+    <div class="resto-body sz">
+      <div class="resto-eyebrow">🌆 Waterfront Complex · OCT Harbour · Bay Views</div>
+      <h3>歡樂港灣 · OCT Harbour</h3>
+      <div class="resto-sub">Nanshan District · Open daily · Great at sunset</div>
+      <div class="tag-row">
+        <span class="tag pick">🌅 No.5 Family Attraction in Guangdong</span>
+        <span class="tag star">🎡 Home of the Bay Glory Ferris Wheel</span>
+      </div>
+      <p class="resto-desc">Shenzhen's most sophisticated waterfront development — a stunning mix of parkland, public art, dining, and entertainment built around a 120,000 sqm harbour. The Bay Glory Ferris Wheel (the third tallest in China) provides a spectacular backdrop, and the lakeside promenade is lined with excellent restaurants and cafés. Perfect for a leisurely dinner as the sun goes down.</p>
+      <p class="resto-desc"><strong>Try:</strong> The Anpha Seafood Restaurant for premium Cantonese, or grab a table at one of the many Western restaurants overlooking the water. The atmosphere here is unlike anywhere else in Shenzhen.</p>
+      <div class="resto-meta" style="background:#f8f6f0; color:#555;">
+        <span>📍 OCT Harbour, Nanshan District (Metro Line 5 to Linkia Park)</span>
+        <span>🕐 Open 24 hrs — restaurants 11AM–11PM</span>
+        <span>🎡 Bay Glory Ferris Wheel: 10:30AM–10PM</span>
+        <span>💰 ¥120–500+/person</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TIPS -->
+<section class="tips-section" id="tips">
+  <h2>🍽️ Dining Essentials</h2>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">💳</div>
+      <div class="tip-title">Payment</div>
+      <div class="tip-body">Most restaurants in Shanghai and Shenzhen accept <strong>WeChat Pay and Alipay</strong>. Some smaller neighbourhood spots still prefer cash. In Hong Kong, cash and credit cards are universally accepted.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📱</div>
+      <div class="tip-title">Reservations</div>
+      <div class="tip-body"><strong>The Chairman:</strong> Book 6–8 weeks ahead via thechairman.hk. <strong>ROOF Bar:</strong> No reservations — arrive at sunset. Most other restaurants: walk in or ask Jade to call ahead.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🍜</div>
+      <div class="tip-title">Xiaolongbao Etiquette</div>
+      <div class="tip-body">Let them cool for a moment — the broth inside is searingly hot. Gently lift with chopsticks, poke a small hole to release steam, then eat in one go. Never dunk in vinegar aggressively — it breaks the skin.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🦀</div>
+      <div class="tip-title">Crab Season</div>
+      <div class="tip-body"><strong>November is peak hairy crab season</strong> in Shanghai — order crab roe xiaolongbao at Qiao Ai Lai Lai without hesitation. Hairy crab is traditionally paired with Shaoxing wine and ginger vinegar.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🥢</div>
+      <div class="tip-title">Tipping Culture</div>
+      <div class="tip-body">Tipping is <strong>not customary</strong> in mainland China — service charges are built in. In Hong Kong, 10% is appreciated at upscale restaurants if a service charge isn't already added.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🍺</div>
+      <div class="tip-title">What to Drink</div>
+      <div class="tip-body">Ask for <strong>Baijai</strong> (Tsingtao) with street food. Pair Cantonese dishes with <strong>茉莉花茶 jasmine tea</strong>. At The Chairman, let the staff recommend a wine or sake pairing — they're exceptional at matching.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="gold">✦ Tam Family China Adventure 2026 — Food & Restaurants ✦</div>
+  <div style="margin-top:8px;">Prepared with 💚 by Jade · bon appétit!</div>
+</footer>
+
+</body>
+</html>

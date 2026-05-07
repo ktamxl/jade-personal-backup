@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shenzhen Spas — Tam Family China 2026</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif; background: #0d1117; color: #e6e8eb; min-height: 100vh; }
+a { color: #58a6ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header */
+header { background: linear-gradient(135deg, #1a2332 0%, #0d1117 100%); border-bottom: 1px solid #21262d; padding: 40px 20px 30px; text-align: center; }
+.header-dates { font-size: 11px; letter-spacing: 3px; color: #8b949e; text-transform: uppercase; margin-bottom: 16px; }
+header h1 { font-size: 28px; font-weight: 700; color: #f0f6fc; margin-bottom: 6px; }
+header h1 .city { color: #58a6ff; }
+header .subtitle { font-size: 15px; color: #8b949e; margin-bottom: 20px; }
+header .badges { display: flex; justify-content: center; gap: 20px; font-size: 13px; color: #8b949e; }
+header .badges span { display: flex; align-items: center; gap: 5px; }
+
+/* Nav */
+nav { background: #161b22; border-bottom: 1px solid #21262d; position: sticky; top: 0; z-index: 100; }
+nav ul { display: flex; justify-content: center; flex-wrap: wrap; list-style: none; padding: 0 20px; }
+nav ul li a { display: block; padding: 14px 20px; color: #8b949e; font-size: 14px; transition: color 0.2s; border-bottom: 2px solid transparent; }
+nav ul li a:hover { color: #e6e8eb; text-decoration: none; }
+nav ul li a.active { color: #f0f6fc; border-bottom-color: #58a6ff; }
+
+/* Hero */
+.hero { background: linear-gradient(135deg, #1a3a2a 0%, #0d1117 60%, #1a2a3a 100%); padding: 50px 20px 40px; text-align: center; }
+.hero p { max-width: 620px; margin: 0 auto; font-size: 15px; line-height: 1.8; color: #8b949e; }
+
+/* Card */
+.card { max-width: 760px; margin: 0 auto 40px; }
+.card-inner { background: #161b22; border: 1px solid #21262d; border-radius: 16px; overflow: hidden; }
+
+/* Card header */
+.card-header { display: flex; align-items: center; gap: 18px; padding: 24px 28px 20px; border-bottom: 1px solid #21262d; }
+.rank-badge { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; flex-shrink: 0; }
+.gold { background: linear-gradient(135deg, #3a2700, #1a1200); color: #ffd700; border: 2px solid #ffd700; }
+.silver { background: linear-gradient(135deg, #1a1a2a, #0d0d1a); color: #c0c0c0; border: 2px solid #c0c0c0; }
+.bronze { background: linear-gradient(135deg, #2a1a00, #1a0d00); color: #cd7f32; border: 2px solid #cd7f32; }
+.card-title { flex: 1; }
+.card-title h2 { font-size: 20px; font-weight: 700; color: #f0f6fc; margin-bottom: 4px; }
+.card-title .location { font-size: 12px; color: #8b949e; display: flex; align-items: center; gap: 4px; }
+
+/* Card body */
+.card-body { padding: 24px 28px; }
+
+/* Rating bar */
+.rating-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.rating-label { font-size: 12px; color: #8b949e; white-space: nowrap; }
+.bar-wrap { flex: 1; height: 6px; background: #21262d; border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; }
+.bar-score { font-size: 13px; font-weight: 700; min-width: 40px; text-align: right; }
+.rating-excellent { background: #ffd700; color: #1a1200; }
+.rating-great { background: #58a6ff; color: #0d1117; }
+.rating-good { background: #3fb950; color: #0d1117; }
+
+/* Description */
+.desc { font-size: 14px; line-height: 1.85; color: #c9d1d9; margin-bottom: 22px; }
+
+/* Features */
+.features { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+.feature-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #c9d1d9; background: #0d1117; padding: 8px 12px; border-radius: 8px; border: 1px solid #21262d; }
+.feature-item .feat-icon { font-size: 16px; flex-shrink: 0; }
+
+/* Price */
+.price-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+.price-tag { background: #1a2a1a; border: 1px solid #2ea043; color: #3fb950; padding: 5px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+
+/* Meta info */
+.meta-row { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: #8b949e; margin-bottom: 18px; }
+.meta-row span { display: flex; align-items: center; gap: 4px; }
+
+/* CTA buttons */
+.cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.cta-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+.cta-btn.primary { background: #58a6ff; color: #0d1117; }
+.cta-btn.primary:hover { background: #79b8ff; text-decoration: none; }
+.cta-btn.secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
+.cta-btn.secondary:hover { background: #30363d; text-decoration: none; }
+
+/* Footer */
+footer { text-align: center; padding: 30px 20px; font-size: 12px; color: #484f58; border-top: 1px solid #21262d; margin-top: 40px; }
+footer a { color: #58a6ff; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .features { grid-template-columns: 1fr; }
+  .card-header { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-dates">Nov 23–27 · 2026</div>
+  <h1>深圳 · <span class="city">Shenzhen</span></h1>
+  <div class="subtitle">🧖 SPA & Wellness</div>
+  <div class="badges">
+    <span>🧖 3 Spas</span>
+    <span>🏙️ Day Experience</span>
+    <span>🇨🇳 China 2026</span>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html">首頁 Home</a></li>
+    <li><a href="attractions.html">景點 Attractions</a></li>
+    <li><a href="restaurants.html">餐廳 Restaurants</a></li>
+    <li><a href="hotels.html">酒店 Hotels</a></li>
+    <li><a href="spa-shanghai.html">上海 SPA</a></li>
+    <li><a href="spa-shenzhen.html" class="active">深圳 SPA</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p>After a day crossing the border, Shenzhen's mega spa clubs offer the perfect reset — 24-hour all-you-can-eat-and-soak luxury complexes, or a Forbes five-star hotel retreat with river views. Three very different ways to unwind. 🌿
+  </p>
+</div>
+
+<br>
+
+<!-- 🥇 #1 -->
+<div class="card">
+  <div class="card-inner">
+    <div class="card-header">
+      <div class="rank-badge gold">🥇</div>
+      <div class="card-title">
+        <h2>港灣一號美食水療會 · Harbor One Gourmet Spa</h2>
+        <div class="location">📍 福田區 · 福田口岸 · Futian Port</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="rating-bar">
+        <span class="rating-label">規模</span>
+        <div class="bar-wrap"><div class="bar-fill" style="width:100%; background:#ffd700;"></div></div>
+        <span class="bar-score" style="color:#ffd700;">MAX</span>
+        <span class="rating-label">豪華</span>
+        <div class="bar-wrap"><div class="bar-fill" style="width:95%; background:#ffd700;"></div></div>
+        <span class="bar-score" style="color:#ffd700;">天花板</span>
+      </div>
+
+      <p class="desc">
+        深圳最大型的「洗浴場」旗艦店 — 佔地足足 <strong>4萬平方米，共三層</strong>，24小時營業。以水療、美食、按摩、桑拿、休閒娛樂於一身的超大型綜合會所。適合從口岸過關後直接抵達，花一整天（或過夜）徹底放鬆。
+      </p>
+
+      <div class="features">
+        <div class="feature-item"><span class="feat-icon">♨️</span><span>天然溫泉池 · 冷熱水池 + 桑拿房</span></div>
+        <div class="feature-item"><span class="feat-icon">🦞</span><span>海鮮自助餐 · 龍蝦、刺身、任食</span></div>
+        <div class="feature-item"><span class="feat-icon">🛋️</span><span>睡眠艙 · 休息大廳 · 過夜首選</span></div>
+        <div class="feature-item"><span class="feat-icon">🎱</span><span>棋牌室 · 桌遊 · 放映區</span></div>
+        <div class="feature-item"><span class="feat-icon">🍓</span><span>時令水果任食 · 草莓、櫻桃等</span></div>
+        <div class="feature-item"><span class="feat-icon">💆</span><span>專業按摩 · 推油、穴位、沐足</span></div>
+        <div class="feature-item"><span class="feat-icon">🍜</span><span>餐廳 · 火鍋、粉麵、點心</span></div>
+        <div class="feature-item"><span class="feat-icon">🛅</span><span>24/7 · 設計為過夜體驗</span></div>
+      </div>
+
+      <div class="price-row">
+        <div class="price-tag">¥600–1,200+（12–24小時 pass）</div>
+        <div class="price-tag">+10% 服務費</div>
+      </div>
+
+      <div class="meta-row">
+        <span>📍 福田口岸附近 · 港灣一號</span>
+        <span>🕐 24小時</span>
+        <span>🚇 福田口岸站</span>
+      </div>
+
+      <div class="cta-row">
+        <a class="cta-btn primary" href="https://www.amap.com/search?query=港灣一號美食水療會&city=440300" target="_blank">🗺️ 高德地圖</a>
+        <a class="cta-btn secondary" href="https://www.loholiday.com/2024/09/23/2024-%E6%B7%B1%E5%9C%B33%E5%A4%A7%E6%B0%B4%E7%99%82%E6%8C%89%E6%91%A9%E6%9C%83%E6%89%80%E5%A4%A7%E5%A0%B4%E6%8E%92%E8%A1%8C%E9%80%90%E4%B8%80%E6%95%B8%E6%B8%85%E6%B9%AF%E7%81%A3%E4%B8%80%E8%99%9F/" target="_blank">🔗 詳情</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🥈 #2 -->
+<div class="card">
+  <div class="card-inner">
+    <div class="card-header">
+      <div class="rank-badge silver">🥈</div>
+      <div class="card-title">
+        <h2>皇室假期美食水療會 · Royal Holiday Gourmet Spa</h2>
+        <div class="location">📍 福田 / 羅湖區 · Shenzhen</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="rating-bar">
+        <span class="rating-label">規模</span>
+        <div class="bar-wrap"><div class="bar-fill" style="width:85%; background:#c0c0c0;"></div></div>
+        <span class="bar-score" style="color:#c0c0c0;">6層</span>
+        <span class="rating-label">豪華</span>
+        <div class="bar-wrap"><div class="bar-fill" style="width:88%; background:#c0c0c0;"></div></div>
+        <span class="bar-score" style="color:#c0c0c0;">高評</span>
+      </div>
+
+      <p class="desc">
+        深圳人氣最高的老牌大型水療會所之一，共六層。最大特色是提供<strong>日式和服換裝體驗</strong>，是打卡拍照的絕佳場景。集水療、按摩、桑拿、休閒娛樂於一身，任食水果、飲料，並有大型觀影區和桌遊，是與朋友或家人 groups 的熱門之選。
+      </p>
+
+      <div class="features">
+        <div class="feature-item"><span class="feat-icon">👘</span><span>日式和服換裝體驗 · 打卡必備</span></div>
+        <div class="feature-item"><span class="feat-icon">🍓</span><span>任食水果 + 飲料</span></div>
+        <div class="feature-item"><span class="feat-icon">🎬</span><span>大型觀影區 · 放映區</span></div>
+        <div class="feature-item"><span class="feat-icon">🎱</span><span>桌遊 · 棋牌室</span></div>
+        <div class="feature-item"><span class="feat-icon">💆</span><span>專業按摩療程 · 推油、沐足</span></div>
+        <div class="feature-item"><span class="feat-icon">♨️</span><span>水療池 · 桑拿 · 汗蒸</span></div>
+        <div class="feature-item"><span class="feat-icon">🍜</span><span>餐廳 · 火鍋、點心</span></div>
+        <div class="feature-item"><span class="feat-icon">🛅</span><span>24/7 · 可過夜</span></div>
+      </div>
+
+      <div class="price-row">
+        <div class="price-tag">¥400–800+（12–24小時 pass）</div>
+        <div class="price-tag">+10% 服務費</div>
+      </div>
+
+      <div class="meta-row">
+        <span>📍 福田 / 羅湖區</span>
+        <span>🕐 24小時</span>
+        <span>🚇 羅湖 / 福田口岸站</span>
+      </div>
+
+      <div class="cta-row">
+        <a class="cta-btn primary" href="https://www.amap.com/search?query=皇室假期美食水療會&city=440300" target="_blank">🗺️ 高德地圖</a>
+        <a class="cta-btn secondary" href="https://utravel.com.hk/news/detail/20007912/2024%E6%B7%B1%E5%9C%B3%E6%8C%89%E6%91%A9%E6%8E%A8%E4%BB%8B-10%E5%A4%A7%E6%B7%B1%E5%9C%B3spa%E6%B0%B4%E7%99%82" target="_blank">🔗 詳情</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🥉 #3 -->
+<div class="card">
+  <div class="card-inner">
+    <div class="card-header">
+      <div class="rank-badge bronze">🥉</div>
+      <div class="card-title">
+        <h2>深圳文華東方酒店水療 · Mandarin Oriental Spa Shenzhen</h2>
+        <div class="location">📍 福田區核心商業帶 · 福田</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="rating-bar">
+        <span class="rating-label">奢華</span>
+        <div class="bar-wrap"><div class="bar-fill" style="width:100%; background:#cd7f32;"></div></div>
+        <span class="bar-score" style="color:#cd7f32;">Forbes ★★★★★</span>
+        <span class="rating-label">私密</span>
+        <div class="bar-wrap"><div class="bar-fill" style="width:98%; background:#cd7f32;"></div></div>
+        <span class="bar-score" style="color:#cd7f32;">頂級</span>
+      </div>
+
+      <p class="desc">
+        深圳唯一榮獲<strong>《福布斯旅遊指南》五星評級</strong>的酒店水療，座落於福田商業區核心地段。專業認證理療師團隊，以西方技術配合中式草本成分，提供真正殿堂級的呵護體驗。適合商務後或夫妻伴侶的專屬時光。
+      </p>
+
+      <div class="features">
+        <div class="feature-item"><span class="feat-icon">🏆</span><span>福布斯旅遊指南五星 · 深圳唯一</span></div>
+        <div class="feature-item"><span class="feat-icon">🌿</span><span>中西結合療程 · 中式草本 + 西式技術</span></div>
+        <div class="feature-item"><span class="feat-icon">🧴</span><span>高端護膚 · La Mer、Swiss 護膚線</span></div>
+        <div class="feature-item"><span class="feat-icon">👥</span><span>雙人套房 · 私人露台</span></div>
+        <div class="feature-item"><span class="feat-icon">🏊</span><span>暖水泳池 + 休閒 lounge</span></div>
+        <div class="feature-item"><span class="feat-icon">🍵</span><span>療程前後茶道體驗</span></div>
+        <div class="feature-item"><span class="feat-icon">🌆</span><span>福田CBD繁華地段 · 景觀優越</span></div>
+        <div class="feature-item"><span class="feat-icon">☎️</span><span>預約制 · 高度私密</span></div>
+      </div>
+
+      <div class="price-row">
+        <div class="price-tag">¥1,800–4,000+（每項療程 90–120 分鐘）</div>
+        <div class="price-tag">日套餐 available</div>
+      </div>
+
+      <div class="meta-row">
+        <span>📍 福田區文華東方酒店</span>
+        <span>🕐 10:00–22:00（預約制）</span>
+        <span>🚇 福田口岸 / 會展中心站</span>
+      </div>
+
+      <div class="cta-row">
+        <a class="cta-btn primary" href="https://www.mandarinoriental.com/en/wellness/spa/shenzhen" target="_blank">🌐 官方網站</a>
+        <a class="cta-btn secondary" href="https://www.cosmopolitan.com.hk/beauty/best-spa-massages-in-shenzhen" target="_blank">🔗 詳情</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>🧖 Tam Family China 2026 · spa-shenzhen.html · 3 curated luxury spas</p>
+  <p><a href="index.html">🏠 Back to Home</a></p>
+</footer>
+
+</body>
+</html>
