@@ -1,0 +1,1 @@
+ALTER TABLE `rentals` ADD `paymentReceived` boolean DEFAULT false NOT NULL;

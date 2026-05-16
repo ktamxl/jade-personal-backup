@@ -1,0 +1,38 @@
+# Correct 4-digit HKEX tickers for Yahoo Finance
+2513.HK  # 智譜 Knowledge Atlas
+100.HK   # MINIMAX-W
+1347.HK  # 華虹半導體 Hua Hong Semiconductor
+2899.HK  # 紫金礦業 Zijin Mining
+700.HK   # 騰訊控股 Tencent
+9698.HK  # 萬國數據-SW GDS Holdings
+3750.HK  # 寧德時代 CATL
+2259.HK  # 紫金黃金國際 Zijin Gold International
+2230.HK  # 科大訊飛 iFlytek
+981.HK   # 中芯國際 SMIC
+388.HK   # 香港交易所 HKEX
+268.HK   # 金蝶國際 Kingdee
+938.HK   # 紫光股份 Tsinghua Unipolar
+1276.HK  # 恒瑞醫藥 Hengrui
+9888.HK  # 百度集團-SW Baidu
+2367.HK  # 巨子生物 Jutze Bio
+20.HK    # 商湯-W SenseTime
+9688.HK  # 再鼎醫藥 Zai Lab
+9988.HK  # 阿里巴巴-W Alibaba
+941.HK   # 中國移動 China Mobile
+2824.HK  # 易方達黃金礦業ETF
+3191.HK  # GlobalX 中國半導體
+1024.HK  # 快手-W Kuaishou
+1810.HK  # 小米集團-W Xiaomi
+1093.HK  # 石藥集團 Stone Pharma
+358.HK   # 江西銅業股份 Jiangxi Copper
+3690.HK  # 美團-W Meituan
+9868.HK  # 小鵬集團-W XPeng
+3081.HK  # 價值黃金ETF
+1801.HK  # 信達生物 Innovent Biologics
+6185.HK  # 康希諾生物 CanSino
+2269.HK  # 藥明生物 WuXi Biologics
+6160.HK  # 百濟神州 BeiGene
+1088.HK  # 中國神華 China Shenhua
+883.HK   # 中國海洋石油 CNOOC
+9926.HK  # 康方生物 Akeso
+1211.HK  # 比亞迪股份 BYD

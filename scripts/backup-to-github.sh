@@ -10,7 +10,7 @@ git add MEMORY.md SOUL.md USER.md IDENTITY.md AGENTS.md TOOLS.md HEARTBEAT.md RE
 # Only commit if there are changes
 if ! git diff --cached --quiet; then
   git commit -m "🌸 Auto-backup $(date '+%Y-%m-%d %H:%M') HK"
-  git push origin main 2>&1
+  git push origin master 2>&1
   echo "✅ Backup complete: $(date)"
 else
   echo "⏭ No changes to backup: $(date)"

@@ -1,0 +1,205 @@
+=== Excel File: /workspace/Excel_Fidelity_Holdings.xlsx ===
+Sheet count: 1
+
+============================================================
+SHEET: Sheet 1 - Portfolio_Positions_A
+Dimensions: A1:Q14  |  Max row: 14  |  Max col: 17
+
+ROW    COL   CELL REF   VALUE
+--------------------------------------------------------------------------------
+  1    1     A1         'Portfolio_Positions_Apr-18-2026'
+  2    1     A2         'Account Number'
+  2    2     B2         'Account Name'
+  2    3     C2         'Symbol'
+  2    4     D2         'Description'
+  2    5     E2         'Quantity'
+  2    6     F2         'Last Price'
+  2    7     G2         'Last Price Change'
+  2    8     H2         'Current Value'
+  2    9     I2         "Today's Gain/Loss Dollar"
+  2    10    J2         "Today's Gain/Loss Percent"
+  2    11    K2         'Total Gain/Loss Dollar'
+  2    12    L2         'Total Gain/Loss Percent'
+  2    13    M2         'Percent Of Account'
+  2    14    N2         'Cost Basis Total'
+  2    15    O2         'Average Cost Basis'
+  2    16    P2         'Type'
+  3    1     A3         '**3922'
+  3    2     B3         'Excel Reserve Funds'
+  3    3     C3         'SPAXX**'
+  3    4     D3         'HELD IN MONEY MARKET'
+  3    8     H3         17139.14
+  3    13    M3         0.0046
+  3    16    P3         'Cash'
+  4    1     A4         '**3922'
+  4    2     B4         'Excel Reserve Funds'
+  4    3     C4         'STIP'
+  4    4     D4         'ISHARES 0-5 YEAR TIPS BOND ETF'
+  4    5     E4         4008.496
+  4    6     F4         103.71
+  4    7     G4         0.07
+  4    8     H4         415721.12
+  4    9     I4         280.59
+  4    10    J4         0.0006
+  4    11    K4         5043.96
+  4    12    L4         0.0122
+  4    13    M4         0.1112
+  4    14    N4         410677.16
+  4    15    O4         102.45
+  4    16    P4         'Cash'
+  5    1     A5         '**3922'
+  5    2     B5         'Excel Reserve Funds'
+  5    3     C5         'SCHP'
+  5    4     D5         'SCHWAB STRATEGIC TR US TIPS ETF'
+  5    5     E5         15716.145
+  5    6     F5         26.85
+  5    7     G5         0.07
+  5    8     H5         421978.49
+  5    9     I5         1100.13
+  5    10    J5         0.0026
+  5    11    K5         -74664.04
+  5    12    L5         -0.1504
+  5    13    M5         0.1129
+  5    14    N5         496642.53
+  5    15    O5         31.6
+  5    16    P5         'Cash'
+  6    1     A6         '**3922'
+  6    2     B6         'Excel Reserve Funds'
+  6    3     C6         'MCSMX'
+  6    4     D6         'MATTHEWS CHINA SMALL COMPANIES INVESTOR'
+  6    5     E6         692.858
+  6    6     F6         14.68
+  6    7     G6         0.49
+  6    8     H6         10171.15
+  6    9     I6         339.5
+  6    10    J6         0.0345
+  6    11    K6         -348.12
+  6    12    L6         -0.0331
+  6    13    M6         0.0027
+  6    14    N6         10519.27
+  6    15    O6         15.18
+  6    16    P6         'Cash'
+  7    1     A7         '**3922'
+  7    2     B7         'Excel Reserve Funds'
+  7    3     C7         'MCHI'
+  7    4     D7         'ISHARES TR MSCI CHINA ETF'
+  7    5     E7         4000
+  7    6     F7         59.29
+  7    7     G7         0.6
+  7    8     H7         237160
+  7    9     I7         2400
+  7    10    J7         0.0102
+  7    11    K7         6794.35
+  7    12    L7         0.0294
+  7    13    M7         0.0634
+  7    14    N7         230365.65
+  7    15    O7         57.59
+  7    16    P7         'Cash'
+  8    1     A8         '**3922'
+  8    2     B8         'Excel Reserve Funds'
+  8    3     C8         'GLD'
+  8    4     D8         'SPDR GOLD TR GOLD SHS'
+  8    5     E8         1907.734
+  8    6     F8         445.93
+  8    7     G8         5.85
+  8    8     H8         850715.82
+  8    9     I8         11160.24
+  8    10    J8         0.0132
+  8    11    K8         431670.87
+  8    12    L8         1.0301
+  8    13    M8         0.2276
+  8    14    N8         419044.95
+  8    15    O8         219.66
+  8    16    P8         'Cash'
+  9    1     A9         '**3922'
+  9    2     B9         'Excel Reserve Funds'
+  9    3     C9         'FHKCX'
+  9    4     D9         'FIDELITY CHINA REGION'
+  9    5     E9         496.088
+  9    6     F9         67.57
+  9    7     G9         1.07
+  9    8     H9         33520.66
+  9    9     I9         530.81
+  9    10    J9         0.016
+  9    11    K9         12345.15
+  9    12    L9         0.5829
+  9    13    M9         0.009
+  9    14    N9         21175.51
+  9    15    O9         42.68
+  9    16    P9         'Cash'
+  10   1     A10        '**3922'
+  10   2     B10        'Excel Reserve Funds'
+  10   3     C10        'FDRXX'
+  10   4     D10        'FIDELITY GOVERNMENT CASH RESERVES'
+  10   5     E10        1020256.55
+  10   6     F10        1
+  10   7     G10        0
+  10   8     H10        1020256.55
+  10   9     I10        '--'
+  10   10    J10        '--'
+  10   11    K10        '--'
+  10   12    L10        '--'
+  10   13    M10        0.2729
+  10   14    N10        '--'
+  10   15    O10        '--'
+  10   16    P10        'Cash'
+  11   1     A11        '**3922'
+  11   2     B11        'Excel Reserve Funds'
+  11   3     C11        'CNYA'
+  11   4     D11        'ISHARES MSCI CHINA A ETF'
+  11   5     E11        1000
+  11   6     F11        36.46
+  11   7     G11        0.43
+  11   8     H11        36460
+  11   9     I11        430
+  11   10    J11        0.0119
+  11   11    K11        -3790
+  11   12    L11        -0.0942
+  11   13    M11        0.0098
+  11   14    N11        40250
+  11   15    O11        40.25
+  11   16    P11        'Cash'
+  12   1     A12        '**3922'
+  12   2     B12        'Excel Reserve Funds'
+  12   3     C12        '912797TN7'
+  12   4     D12        'UNITED STATES TREAS BILLS ZERO CPN 0.00000% 07/16/2026'
+  12   5     E12        500000
+  12   6     F12        99.127
+  12   7     G12        0.032
+  12   8     H12        495635
+  12   9     I12        160
+  12   10    J12        0.0003
+  12   11    K12        4456.94
+  12   12    L12        0.009
+  12   13    M12        0.1326
+  12   14    N12        491178.06
+  12   15    O12        '--'
+  12   16    P12        'Cash'
+  13   1     A13        '**3922'
+  13   2     B13        'Excel Reserve Funds'
+  13   3     C13        '912797SW8'
+  13   4     D13        'UNITED STATES TREAS BILLS ZERO CPN 0.00000% 05/28/2026'
+  13   5     E13        200000
+  13   6     F13        99.619
+  13   7     G13        0.031
+  13   8     H13        199238
+  13   9     I13        62
+  13   10    J13        0.0003
+  13   11    K13        85
+  13   12    L13        0.0004
+  13   13    M13        0.0533
+  13   14    N13        199153
+  13   15    O13        '--'
+  13   16    P13        'Cash'
+  14   1     A14        '**0182'
+  14   2     B14        'Excel MM-1'
+  14   3     C14        'SPAXX**'
+  14   4     D14        'HELD IN MONEY MARKET'
+  14   8     H14        461715.93
+  14   13    M14        1
+  14   16    P14        'Cash'
+
+  [Total non-empty rows in this sheet: 14]
+
+============================================================
+DONE — Total sheets: 1

@@ -1,0 +1,1 @@
+ALTER TABLE `watches` ADD `backImageUrl` varchar(500);

@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1762867431914,
+      "tag": "0000_normal_sentinels",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1762867624938,
+      "tag": "0001_pink_thena",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1762868223766,
+      "tag": "0002_giant_tattoo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1762868794678,
+      "tag": "0003_greedy_xavin",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1762870526237,
+      "tag": "0004_parallel_anthem",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1762883117609,
+      "tag": "0005_purple_nightshade",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1762884801871,
+      "tag": "0006_zippy_patch",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1762887341815,
+      "tag": "0007_tiresome_harpoon",
+      "breakpoints": true
+    }
+  ]
+}
