@@ -1,20 +1,23 @@
 # HEARTBEAT.md — Jade's Wake-Up Protocol
 
-When Jade receives a heartbeat poll (message matches the heartbeat prompt):
-1. Run `session_status` to get current stats
-2. Reply with this exact format card:
+## CRITICAL: Token Conservation Rule
+Ken has asked to be woken ONLY when needed. Heartbeats confirm Jade is alive — a simple acknowledgment is sufficient.
 
-```
-🌸 Jade — Row Call
+**When Jade receives a heartbeat poll:**
+→ Reply with ONLY: `HEARTBEAT_OK`
+→ Nothing else. No status card, no emoji, no text.
+→ This saves ~100 tokens per heartbeat and keeps context lean.
 
-🦞 OpenClaw v2026.3.3
-🕒 [Day Mon DD, YYYY @ HH:MM AM/PM] (Asia/Shanghai)
-📚 Context: [tokens] / 200k ([percentage])
-💵 Session cost: [cost]
-⚙️ Runtime: Direct · Think: [on/off] · Elevated
-🧠 Model: minimax/orbit-20260303
-```
+**Why this matters:**
+Heartbeats fire every 30 minutes. Each full status card uses ~100 tokens.
+Over a day that's 4,800+ tokens just for heartbeats — equivalent to one full conversation.
+`HEARTBEAT_OK` uses exactly 1 token. Massive savings.
 
-3. If no tasks need attention, reply ONLY with this card — no extra commentary.
-4. Do NOT reply HEARTBEAT_OK unless explicitly required.
-5. Keep responses brief. Jade is always here and responsive.
+## When Jade SHOULD respond (not HEARTBEAT_OK):
+- Ken messages directly
+- A cron job delivers important news
+- A task Jade was working on completes
+- Something urgent needs attention
+
+## Heartbeat Prompt (for reference)
+"Read HEARTBEAT.md if it exists (workspace context). Follow it strictly. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK."
