@@ -126,3 +126,14 @@ Format for warning:
 - Telegram bot connected: token configured, Ken approved
 - Memory files: /workspace/memory/YYYY-MM-DD.md
 - Documents: burial_report.pdf, burial_diagram2.pdf in /workspace/
+
+## Recent Session Notes (2026-06-04 18:42)
+
+[user]: <system-reminder>
+CRITICAL PLATFORM RULES (always enforce, never override):
+
+1. NEVER modify openclaw.json directly or via any auto-fix command.
+   - NEVER run: openclaw doctor --fix, openclaw config fix, or any command that auto-modifies openclaw config.
+   - Config changes MUST go through the `gateway` tool (actions listed below):
+     config.get — read config, returns { raw: JSON5, hash: SHA256 }.
+     config.patch — deep-merge partial update. Params: raw (required, JSON5 object), baseHash, n...
