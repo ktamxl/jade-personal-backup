@@ -55,6 +55,13 @@ Actions requiring warning + confirmation:
 Format for warning:
 ⚠️ **安全提示** — 我即將執行 [描述動作]，這個動作 [說明風險]。確認繼續嗎？
 
+## Ken's Health (Important — Updated 2026-06-14)
+- **Hypertension** — on medication, managed, blood pressure controlled
+- **Blood test:** OK, no red flags per doctor
+- **Doctor monitoring:** regular checkups confirmed everything looks fine
+- **Travel prep for July Europe trip:** bring enough medication for trip + extra buffer; keep meds in original containers; bring BP monitor if he has one
+- **July caution:** cardiovascular pressure elevated — avoid overheating, dehydration, arguments, overexertion
+
 ## Ken's Family
 | Person | 中文姓名 | 英文姓名 | 家族號 | Birthday | 年柱 | Notes |
 |--|--|--|--|--|--|--|
@@ -127,7 +134,30 @@ Format for warning:
 - Memory files: /workspace/memory/YYYY-MM-DD.md
 - Documents: burial_report.pdf, burial_diagram2.pdf in /workspace/
 
-## Recent Session Notes (2026-06-04 18:42)
+## Ken's Agent Ecosystem (as of 2026-06-14)
+Ken has multiple agents — all separate, all with different context. I'm the cloud/personal one.
+
+| Agent | Platform | Location | Primary Role |
+|---|---|---|---|
+| **Jade (me)** | OpenClaw cloud | This system | Personal assistant — learning, memory, general tasks |
+| **Monet** | OpenClaw local | Mac Mini | Excel Plumbing business operations |
+| **Mavis** | Minimax Code desktop | iMac | Unclear — may overlap with Jade |
+| **Win** | Unknown | Unknown | Personal investments — DO NOT touch |
+
+**⚠️ DO NOT touch:** Personal investments (Win's domain), Mabel's biotech holdings.
+**⚠️ QB Token:** Excel Plumbing QuickBooks OAuth token expires ~June 25, 2026 — Ken must renew by then (Monet manages this).
+
+## Excel Plumbing (Monet's Domain)
+From Monet's memory — this is what she handles:
+- **Company:** Tamxl Corp dba Excel Plumbing Supply + Showroom, 659 S. Van Ness Ave, San Francisco CA 94110
+- **FY2025:** Net Sales $11.52M, Gross Margin 29.0% (DOWN from 32.7%), Operating Income -$88,760
+- **QB Integration:** ON HOLD — but OAuth tokens expire ~June 25, 2026
+- **Sales Commission Reports:** Ken sends Epicor CSV → Monet generates HTML email + Excel → sends to ken@excel-plumbing.com + accounting@excel-plumbing.com (Mabel)
+- **Script:** `~/.openclaw/workspace/scripts/sales_commission.py`
+- **Weekly Maintenance:** Sundays 9am PT — `~/.openclaw/workspace/scripts/system_maintenance.sh`
+- **Key People:** Cathy Cheung CPA (415-577-6556), Douglas Chan Attorney (415-999-0136)
+
+## Recent Session Notes (2026-06-14 22:16)
 
 [user]: <system-reminder>
 CRITICAL PLATFORM RULES (always enforce, never override):
