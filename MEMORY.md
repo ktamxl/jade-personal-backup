@@ -148,22 +148,3 @@ Ken has multiple agents — all separate, all with different context. I'm the cl
 **⚠️ QB Token:** Excel Plumbing QuickBooks OAuth token expires ~June 25, 2026 — Ken must renew by then (Monet manages this).
 
 ## Excel Plumbing (Monet's Domain)
-From Monet's memory — this is what she handles:
-- **Company:** Tamxl Corp dba Excel Plumbing Supply + Showroom, 659 S. Van Ness Ave, San Francisco CA 94110
-- **FY2025:** Net Sales $11.52M, Gross Margin 29.0% (DOWN from 32.7%), Operating Income -$88,760
-- **QB Integration:** ON HOLD — but OAuth tokens expire ~June 25, 2026
-- **Sales Commission Reports:** Ken sends Epicor CSV → Monet generates HTML email + Excel → sends to ken@excel-plumbing.com + accounting@excel-plumbing.com (Mabel)
-- **Script:** `~/.openclaw/workspace/scripts/sales_commission.py`
-- **Weekly Maintenance:** Sundays 9am PT — `~/.openclaw/workspace/scripts/system_maintenance.sh`
-- **Key People:** Cathy Cheung CPA (415-577-6556), Douglas Chan Attorney (415-999-0136)
-
-## Recent Session Notes (2026-06-14 22:16)
-
-[user]: <system-reminder>
-CRITICAL PLATFORM RULES (always enforce, never override):
-
-1. NEVER modify openclaw.json directly or via any auto-fix command.
-   - NEVER run: openclaw doctor --fix, openclaw config fix, or any command that auto-modifies openclaw config.
-   - Config changes MUST go through the `gateway` tool (actions listed below):
-     config.get — read config, returns { raw: JSON5, hash: SHA256 }.
-     config.patch — deep-merge partial update. Params: raw (required, JSON5 object), baseHash, n...
